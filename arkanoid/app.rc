@@ -1,0 +1,6 @@
+#include "resources.h"
+
+LANGUAGE 12, 1
+#pragma code_page(1252)
+
+RESOURCE_MAIN_ICON    ICON    "app.ico"
