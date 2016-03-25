@@ -4,26 +4,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "arkanoid", "arkanoid\arkanoid.vcxproj", "{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC2083B2-41E9-4BC0-8BAA-16F7AB651733} = {DC2083B2-41E9-4BC0-8BAA-16F7AB651733}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{9757CB21-B840-49A6-B057-9F322E543DD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "arkanoid-model", "arkanoid-model\arkanoid-model.vcxproj", "{DC2083B2-41E9-4BC0-8BAA-16F7AB651733}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests-arkanoid-model", "tests-arkanoid-model\tests-arkanoid-model.vcxproj", "{2F565228-D2B5-44CF-B5F5-346F0C8046C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Release|x64 = Release|x64
-		Tests|x64 = Tests|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Debug|x64.ActiveCfg = Debug|x64
 		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Debug|x64.Build.0 = Debug|x64
+		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Debug|x64.Deploy.0 = Debug|x64
 		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Release|x64.ActiveCfg = Release|x64
 		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Release|x64.Build.0 = Release|x64
-		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Tests|x64.ActiveCfg = Tests|x64
-		{E665CA08-29C0-4002-AFF8-F1AA5D629D9E}.Tests|x64.Build.0 = Tests|x64
-		{9757CB21-B840-49A6-B057-9F322E543DD6}.Debug|x64.ActiveCfg = Debug|x64
-		{9757CB21-B840-49A6-B057-9F322E543DD6}.Release|x64.ActiveCfg = Release|x64
-		{9757CB21-B840-49A6-B057-9F322E543DD6}.Tests|x64.ActiveCfg = Release|x64
-		{9757CB21-B840-49A6-B057-9F322E543DD6}.Tests|x64.Build.0 = Release|x64
+		{DC2083B2-41E9-4BC0-8BAA-16F7AB651733}.Debug|x64.ActiveCfg = Debug|x64
+		{DC2083B2-41E9-4BC0-8BAA-16F7AB651733}.Debug|x64.Build.0 = Debug|x64
+		{DC2083B2-41E9-4BC0-8BAA-16F7AB651733}.Release|x64.ActiveCfg = Release|x64
+		{DC2083B2-41E9-4BC0-8BAA-16F7AB651733}.Release|x64.Build.0 = Release|x64
+		{2F565228-D2B5-44CF-B5F5-346F0C8046C6}.Debug|x64.ActiveCfg = Debug|x64
+		{2F565228-D2B5-44CF-B5F5-346F0C8046C6}.Debug|x64.Build.0 = Debug|x64
+		{2F565228-D2B5-44CF-B5F5-346F0C8046C6}.Release|x64.ActiveCfg = Release|x64
+		{2F565228-D2B5-44CF-B5F5-346F0C8046C6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
