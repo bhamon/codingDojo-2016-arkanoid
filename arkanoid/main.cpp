@@ -6,34 +6,41 @@
 #define HEIGHT 600
 #define CLASS_NAME "OpenGL"
 
-LRESULT	CALLBACK WndProc(HWND p_window, UINT p_message, WPARAM p_wParam, LPARAM p_lParam) {
-	switch(p_message) {
+LRESULT	CALLBACK WndProc(HWND p_window, UINT p_message, WPARAM p_wParam, LPARAM p_lParam)
+{
+	switch(p_message)
+	{
 		case WM_CLOSE:
 			PostQuitMessage(0);
-		break;
+			break;
 	}
 
 	return DefWindowProc(p_window, p_message, p_wParam, p_lParam);
 }
 
-void KillWindow(HINSTANCE p_instance, HWND p_window, HDC p_deviceContext, HGLRC p_renderingContext) {
-	if(p_renderingContext) {
+void KillWindow(HINSTANCE p_instance, HWND p_window, HDC p_deviceContext, HGLRC p_renderingContext)
+{
+	if(p_renderingContext)
+	{
 		wglMakeCurrent(0, 0);
 		wglDeleteContext(p_renderingContext);
 	}
 
-	if(p_deviceContext) {
+	if(p_deviceContext)
+	{
 		ReleaseDC(p_window, p_deviceContext);
 	}
 
-	if(p_window) {
+	if(p_window)
+	{
 		DestroyWindow(p_window);
 	}
 
 	UnregisterClass(CLASS_NAME, p_instance);
 }
 
-int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_args, int p_show) {
+int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_args, int p_show)
+{
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;    // Redraw on size, own DC window
 	wc.lpfnWndProc = (WNDPROC)WndProc;                // Message callback
@@ -47,7 +54,8 @@ int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_a
 	wc.lpszClassName = CLASS_NAME;                    // Class name
 
 	// Registering class.
-	if(!RegisterClass(&wc)) {
+	if(!RegisterClass(&wc))
+	{
 		MessageBox(NULL, "Failed to register the window class.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
 	}
@@ -74,9 +82,10 @@ int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_a
 		0,                                                          // No menu
 		p_instance,                                                 // Instance
 		0                                                           // Nothing to pass to WM_CREATE
-	);
+		);
 
-	if(!window) {
+	if(!window)
+	{
 		KillWindow(p_instance, window, 0, 0);
 		MessageBox(NULL, "Unable to create window.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
@@ -84,7 +93,8 @@ int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_a
 
 	// Retrieving device context
 	HDC deviceContext = GetDC(window);
-	if(!deviceContext) {
+	if(!deviceContext)
+	{
 		KillWindow(p_instance, window, 0, 0);
 		MessageBox(NULL, "Unable to create an OpenGL device context.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
@@ -111,14 +121,16 @@ int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_a
 
 	// Retrieving pixel format
 	int pixelFormat = ChoosePixelFormat(deviceContext, &pixelFormatDescriptor);
-	if(!pixelFormat) {
+	if(!pixelFormat)
+	{
 		KillWindow(p_instance, window, deviceContext, 0);
 		MessageBox(NULL, "Unable to find a suitable pixel format.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
 	}
 
 	// Setting pixel format
-	if(!SetPixelFormat(deviceContext, pixelFormat, &pixelFormatDescriptor)) {
+	if(!SetPixelFormat(deviceContext, pixelFormat, &pixelFormatDescriptor))
+	{
 		KillWindow(p_instance, window, deviceContext, 0);
 		MessageBox(NULL, "Unable to set the pixel format.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
@@ -126,14 +138,16 @@ int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_a
 
 	// Creating rendering context
 	HGLRC renderingContext = wglCreateContext(deviceContext);
-	if(!renderingContext) {
+	if(!renderingContext)
+	{
 		KillWindow(p_instance, window, deviceContext, 0);
 		MessageBox(NULL, "Unable to create an OpenGL rendering context.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
 	}
 
 	// Activating rendering context
-	if(!wglMakeCurrent(deviceContext, renderingContext)) {
+	if(!wglMakeCurrent(deviceContext, renderingContext))
+	{
 		KillWindow(p_instance, window, deviceContext, renderingContext);
 		MessageBox(NULL, "Unable to activate the OpenGL rendering context.", "Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
@@ -150,15 +164,22 @@ int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_a
 
 	// Event loop
 	MSG message;
-	while(true) {
-		if(PeekMessage(&message, 0, 0, 0, PM_REMOVE)) {
-			if(message.message == WM_QUIT) {
+	while(true)
+	{
+		if(PeekMessage(&message, 0, 0, 0, PM_REMOVE))
+		{
+			if(message.message == WM_QUIT)
+			{
 				break;
-			} else {
+			}
+			else
+			{
 				TranslateMessage(&message);
 				DispatchMessage(&message);
 			}
-		} else {
+		}
+		else
+		{
 			// DRAW SCENE
 			SwapBuffers(deviceContext);
 		}

@@ -3,20 +3,21 @@
 
 #include "Position.h"
 
-class Brick {
+class Brick
+{
 	private:
-		Position _position;
-		unsigned int _strength;
+	Position _position;
+	unsigned int _strength;
 
 	public:
-		Brick(const Position& position, unsigned int strength);
-		Brick(const Brick& brick);
+	Brick(const Position& position, unsigned int strength);
+	Brick(const Brick& brick);
 
-		const Position& getPosition() const;
-		unsigned int getStrength() const;
+	const Position& getPosition() const;
+	unsigned int getStrength() const;
 
-		void setPosition(const Position& position);
-		void setStrength(unsigned int strength);
+	void setPosition(const Position& position);
+	void setStrength(unsigned int strength);
 };
 
 #endif

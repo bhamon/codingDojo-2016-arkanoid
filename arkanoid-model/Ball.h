@@ -3,18 +3,19 @@
 
 class Position;
 
-class Ball {
+class Ball
+{
 	private:
-		Position* _pPosition;
-		unsigned int _speed;
+	Position* _pPosition;
+	unsigned int _speed;
 
 	public:
-		Ball(unsigned int position_x, unsigned int position_y, unsigned int speed);
-		virtual ~Ball();
+	Ball(unsigned int position_x, unsigned int position_y, unsigned int speed);
+	virtual ~Ball();
 
-		unsigned int getPositionX() const;
-		unsigned int getPositionY() const;
-		unsigned int getSpeed() const;
+	unsigned int getPositionX() const;
+	unsigned int getPositionY() const;
+	unsigned int getSpeed() const;
 };
 
 
