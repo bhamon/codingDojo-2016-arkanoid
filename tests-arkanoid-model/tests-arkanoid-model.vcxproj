@@ -86,11 +86,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TestBall.cpp" />
+    <ClCompile Include="TestGame.cpp" />
+    <ClCompile Include="TestRacket.cpp" />
     <ClCompile Include="TestBrick.cpp" />
+    <ClCompile Include="TestCalculator.cpp" />
+    <ClCompile Include="TestField.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
     <ClCompile Include="TestPosition.cpp" />
-    <ClCompile Include="TestRacket.cpp" />
+    <ClCompile Include="TestBall.cpp" />
+    <ClCompile Include="TestVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\arkanoid-model\arkanoid-model.vcxproj">

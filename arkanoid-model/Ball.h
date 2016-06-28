@@ -1,21 +1,27 @@
 #ifndef BALL_H
 #define BALL_H
 
-class Position;
+#include "Position.h"
+#include "Vector.h"
 
 class Ball
 {
+	public:
+	static const float RADIUS;
+
 	private:
-	Position* _pPosition;
-	unsigned int _speed;
+	Position _position;
+	VectorF _vector;
 
 	public:
-	Ball(unsigned int position_x, unsigned int position_y, unsigned int speed);
+	Ball(const Position& position, const VectorF &vector);
 	virtual ~Ball();
 
-	unsigned int getPositionX() const;
-	unsigned int getPositionY() const;
-	unsigned int getSpeed() const;
+	const Position& getPosition() const;
+	const VectorF& getVector() const;
+
+	void setPosition(const Position& position);
+	void setVector(const VectorF& vector);
 };
 
 

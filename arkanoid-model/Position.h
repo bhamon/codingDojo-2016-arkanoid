@@ -1,21 +1,33 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-class Position
-{
-	private:
-	unsigned int _x;
-	unsigned int _y;
+#include "Vector.h"
 
-	public:
-	Position(unsigned int x, unsigned int y);
-	virtual ~Position();
+typedef VectorF Position;
 
-	unsigned int getX() const;
-	const unsigned int& getY() const;
 
-	void setX(unsigned int x);
-	void setY(const unsigned int& y);
-};
+//template <class T> class Vector;
+//
+//class Position
+//{
+//	private:
+//	int _x;
+//	int _y;
+//
+//	public:
+//	Position(int x, int y);
+//	virtual ~Position();
+//
+//	int getX() const;
+//	const int& getY() const;
+//
+//	void setX(int x);
+//	void setY(const int& y);
+//
+//	bool operator==(const Position &pos) const;
+//
+//	Position& operator+=(const Vector <float> &v);
+//
+//};
 
 #endif // POSITION_H

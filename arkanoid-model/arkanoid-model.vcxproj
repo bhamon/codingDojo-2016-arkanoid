@@ -75,16 +75,21 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Calculator.cpp" />
+    <ClCompile Include="Field.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Position.cpp" />
     <ClCompile Include="Racket.cpp" />
+    <ClInclude Include="Vector.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Calculator.h" />
+    <ClInclude Include="Field.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Racket.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

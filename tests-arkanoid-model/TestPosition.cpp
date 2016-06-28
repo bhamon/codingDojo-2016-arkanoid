@@ -12,8 +12,8 @@ namespace tests
 		{
 			Position p(10, 20);
 
-			Assert::AreEqual(10u, p.getX());
-			Assert::AreEqual(20u, p.getY());
+			Assert::AreEqual(10.f, p.getX());
+			Assert::AreEqual(20.f, p.getY());
 		}
 	};
 }

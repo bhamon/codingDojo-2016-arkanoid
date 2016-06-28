@@ -1,30 +1,36 @@
 #include "Ball.h"
-#include "Position.h"
 
-Ball::Ball(unsigned int position_x, unsigned int position_y, unsigned int speed)
-	: _pPosition(0)
-	, _speed(speed)
+const float Ball::RADIUS = 2;
+
+Ball::Ball(const Position& position, const VectorF& vector)
+	: _position(position)
+	, _vector(vector)
 {
-	_pPosition = new Position(position_x, position_y);
 }
 
 Ball::~Ball()
 {
-	delete _pPosition;
 }
 
-unsigned int
-Ball::getPositionX() const
+const Position&
+Ball::getPosition() const
 {
-	return _pPosition->getX();
+	return _position;
 }
-unsigned int
-Ball::getPositionY() const
+
+const VectorF&
+Ball::getVector() const
 {
-	return _pPosition->getY();
+	return _vector;
 }
-unsigned int
-Ball::getSpeed() const
+
+void Ball::setPosition(const Position& position)
 {
-	return _speed;
+	_position = position;
+}
+
+void
+Ball::setVector(const VectorF& vector)
+{
+	_vector = vector;
 }

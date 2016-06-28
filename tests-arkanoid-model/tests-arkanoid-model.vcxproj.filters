@@ -24,10 +24,22 @@
     <ClCompile Include="TestBrick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestRacket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
