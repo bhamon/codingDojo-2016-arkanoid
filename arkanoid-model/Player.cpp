@@ -7,6 +7,10 @@ Player::Player(const std::string &name)
 {
 }
 
+Player::~Player()
+{
+}
+
 const std::string &
 Player::getName() const
 {
@@ -32,13 +36,23 @@ Player::setName(const std::string& name)
 }
 
 void
-Player::setScore(const unsigned int score)
+Player::setScore(unsigned int score)
 {
 	_score = score;
 }
 
 void
-Player::setLives(const unsigned int lives)
+Player::setLives(unsigned int lives)
 {
 	_lives = lives;
+}
+
+unsigned int& Player::score()
+{
+	return _score;
+}
+
+unsigned int& Player::lives()
+{
+	return _lives;
 }

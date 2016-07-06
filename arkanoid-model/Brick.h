@@ -1,31 +1,34 @@
 #ifndef BRICK_H
 #define BRICK_H
 
-#include "Position.h"
-#include "Ball.h"
+#include "Point2.h"
 
 class Brick
 {
 	public:
-	static const float BRICK_WIDTH;
-	static const float BRICK_HEIGHT;
+	static const float WIDTH;
+	static const float HEIGHT;
 
 	private:
-	Position _position;
+	math::Point2<float> _position;
 	unsigned int _strength;
 
 	public:
-	Brick();
-	Brick(const Position& position, unsigned int strength);
+	Brick(const math::Point2<float>& position, unsigned int strength);
 	Brick(const Brick& brick);
+	~Brick();
 
-	const Position& getPosition() const;
+	const math::Point2<float>& getPosition() const;
 	unsigned int getStrength() const;
 
-	void setPosition(const Position& position);
+	void setPosition(const math::Point2<float>& position);
 	void setStrength(unsigned int strength);
 
+	math::Point2<float>& position();
+	unsigned int& strength();
+
 	bool isValid() const;
+	bool overlap(const Brick& brick) const;
 };
 
 #endif

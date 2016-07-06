@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include <arkanoid-model\Position.h>
+#include <arkanoid-model\Point2.h>
 #include <arkanoid-model\Field.h>
 #include <arkanoid-model\Brick.h>
 
@@ -12,76 +12,56 @@ namespace tests
 		public:
 		TEST_METHOD(constructor)
 		{
-			Field field(10, 22);
+			Field field(100.0f, 220.0f);
 
-			Assert::AreEqual(10u, field.getWidth());
-			Assert::AreEqual(22u, field.getHeight());
+			Assert::AreEqual(100.0f, field.getWidth(), 0.0001f);
+			Assert::AreEqual(220.0f, field.getHeight(), 0.0001f);
 		}
 
-		public:
-		TEST_METHOD(setter)
-		{
-			Field field;
-
-			field.setWidth(12u);
-			field.setHeight(16u);
-
-			Assert::AreEqual(12u, field.getWidth());
-			Assert::AreEqual(16u, field.getHeight());
-		}
-
-		public:
 		TEST_METHOD(addBrick)
 		{
-			Field field;
-			Brick brick(Position(2, 5), 2);
+			Field field(100.0f, 200.0f);
+			Brick brick(math::Point2<float>(20.0f, 50.0f), 2);
 
-			field.addBrick(brick);
+			bool added = field.addBrick(brick);
+
+			Assert::AreEqual(true, added);
 			Assert::AreEqual(1u, field.getBrickNumber());
 		}
 
-		public:
-		TEST_METHOD(getBrick)
+		TEST_METHOD(addBrickOutside)
 		{
-			Field field;
-			Brick brick(Position(2, 7), 9);
-			Brick brick_test = field.getBrick(Position(2, 7));
-			Assert::AreEqual(brick_test.isValid(), false);
+			Field field(200.0f, 200.0f);
+			Brick brick(math::Point2<float>(10.0f, 25.0f), 2);
 
-			field.addBrick(brick);
-			brick_test = field.getBrick(Position(2, 7));
-			Assert::AreEqual(brick_test.isValid(), true);
+			bool added = field.addBrick(brick);
 
-
+			Assert::AreEqual(added, false);
+			Assert::AreEqual(0u, field.getBrickNumber());
 		}
 
-
-		public:
-		TEST_METHOD(addWrongBrick)
-		{
-			Field field(20, 20);
-			Brick brick(Position(10, 25), 2);
-
-			bool hasBeenAdded = field.addBrick(brick);
-			Assert::AreEqual(hasBeenAdded, false);
-
-			brick.setPosition(Position(10, 12));
-			brick.setStrength(0);
-			hasBeenAdded = field.addBrick(brick);
-			Assert::AreEqual(hasBeenAdded, false);
-		}
-
-		public:
 		TEST_METHOD(addBrickTwice)
 		{
-			Field field(20, 20);
-			Brick brick(Position(10, 12), 2);
+			Field field(200.0f, 200.0f);
+			Brick brick(math::Point2<float>(40.0f, 50.0f), 2);
 
-			bool hasBeenAdded = field.addBrick(brick);
-			Assert::AreEqual(hasBeenAdded, true);
+			field.addBrick(brick);
+			bool added = field.addBrick(brick);
 
-			hasBeenAdded = field.addBrick(brick);
-			Assert::AreEqual(hasBeenAdded, false);
+			Assert::AreEqual(added, false);
+			Assert::AreEqual(1u, field.getBrickNumber());
+		}
+
+		TEST_METHOD(canFitInside)
+		{
+			Field field(200.0f, 200.0f);
+			Brick bIn(math::Point2<float>(100.0f, 120.0f), 2);
+			Brick bOut(math::Point2<float>(300.0f, 120.0f), 2);
+			Brick bCross(math::Point2<float>(210.0f, 10.0f), 2);
+
+			Assert::AreEqual(true, field.canFitInside(bIn));
+			Assert::AreEqual(false, field.canFitInside(bOut));
+			Assert::AreEqual(false, field.canFitInside(bCross));
 		}
 	};
 }

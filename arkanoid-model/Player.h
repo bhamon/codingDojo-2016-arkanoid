@@ -12,15 +12,18 @@ class Player
 
 	public:
 	Player(const std::string &name);
+	virtual ~Player();
 
-	const std::string &getName() const;
+	const std::string& getName() const;
 	unsigned int getScore() const;
 	unsigned int getLives() const;
 
 	void setName(const std::string& name);
-	void setScore(const unsigned int score);
-	void setLives(const unsigned int lives);
+	void setScore(unsigned int score);
+	void setLives(unsigned int lives);
 
+	unsigned int& score();
+	unsigned int& lives();
 };
 
-#endif // PLAYER_H
+#endif

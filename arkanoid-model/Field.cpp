@@ -1,78 +1,56 @@
-#include "Brick.h"
 #include "Field.h"
+#include "Calculator.h"
 
-Field::Field(unsigned int width, unsigned int height)
-	:_width(width),
+Field::Field(float width, float height)
+	: _width(width),
 	 _height(height),
-	 _brickList()
+	 _bricks()
 {
 }
 
-unsigned int Field::getHeight() const
-{
-	return _height;
-}
-
-unsigned int Field::getWidth() const
+float Field::getWidth() const
 {
 	return _width;
 }
 
-void Field::setWidth(unsigned int width)
+float Field::getHeight() const
 {
-	_width = width;
-}
-
-void Field::setHeight(unsigned int height)
-{
-	_height = height;
+	return _height;
 }
 
 bool Field::addBrick(const Brick& brick)
 {
-	bool hasBeenAdded = true;
-
-	if(brick.getPosition().getX() >= 0
-		&& brick.getPosition().getX() < _width
-		&& brick.getPosition().getY() >= 0
-		&& brick.getPosition().getY() < _height
-		&& brick.isValid())
+	if(
+		!canFitInside(brick) ||
+		!brick.isValid()
+	)
 	{
-		if(getBrick(brick.getPosition()).isValid() == false)
-		{
-			_brickList.push_front(brick);
-		}
-		else
-		{
-			hasBeenAdded = false;
-		}
-	}
-	else
-	{
-		hasBeenAdded = false;
+		return false;
 	}
 
-	return hasBeenAdded;
+	for(Brick& b : _bricks)
+	{
+		if(brick.overlap(b))
+		{
+			return false;
+		}
+	}
+
+	_bricks.push_back(brick);
+
+	return true;
 }
 
 unsigned int Field::getBrickNumber() const
 {
-	return static_cast<unsigned int>(_brickList.size());
+	return static_cast<unsigned int>(_bricks.size());
 }
 
-Brick Field::getBrick(const Position& position)
+bool Field::canFitInside(const Brick& brick) const
 {
-	/*for(std::list<Brick>::iterator it = _brickList.begin(); it != _brickList.end(); ++it)
-	{
-	const Brick &b = *it;
-	}*/
-
-	for(const Brick &b : _brickList)
-	{
-		if(b.getPosition() == position)
-		{
-			return b;
-		}
-	}
-	return Brick();
+	return
+		brick.getPosition().getX() - Brick::WIDTH / 2.0 >= 0.0f &&
+		brick.getPosition().getX() + Brick::WIDTH / 2.0 < _width &&
+		brick.getPosition().getY() - Brick::HEIGHT / 2.0 >= 0.0f &&
+		brick.getPosition().getY() + Brick::HEIGHT / 2.0 < _height;
 }

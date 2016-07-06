@@ -4,6 +4,8 @@
 #include <arkanoid-model\Field.h>
 #include <arkanoid-model\Ball.h>
 #include <arkanoid-model\Player.h>
+#include <arkanoid-model\Vector2.h>
+#include <arkanoid-model\Point2.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,14 +16,10 @@ namespace tests
 		public:
 		TEST_METHOD(BrickDamage)
 		{
-			Field field(10, 22);
+			Field field(10.0f, 22.0f);
+			Brick brick(math::Point2<float>(2.0f, 3.0f), 3);
 
-			Position pos(2, 3);
-			Brick brick(pos, 3);
-
-			VectorF v(0, 1);
-			Position p(2, 2);
-			Ball ball(p, v);
+			Ball ball(math::Point2<float>(0.0f, 1.0f), math::Vector2<float>(2.0f, 2.0f));
 
 			//	std::list<Brick> reachableBricks = field.getReachableBricks(ball);
 		}

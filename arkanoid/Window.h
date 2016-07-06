@@ -10,16 +10,16 @@ namespace arkanoid
 	class Window
 	{
 		public:
-		static void registerClass() throw (std::runtime_error);
+		static void registerClass();
 		static void unregisterClass();
 
-		private:
+		protected:
 		HWND m_handle;
 		HDC m_deviceContext;
 		HGLRC m_renderingContext;
 
 		public:
-		Window(unsigned int p_width, unsigned int p_height, const std::string& p_title) throw (std::runtime_error);
+		Window(unsigned int p_width, unsigned int p_height, const std::string& p_title);
 		virtual ~Window();
 
 		unsigned int getWidth() const;

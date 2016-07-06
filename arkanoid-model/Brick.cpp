@@ -1,28 +1,25 @@
 #include "Brick.h"
-#include "Position.h"
 
-const float Brick::BRICK_WIDTH = 2;
-const float Brick::BRICK_HEIGHT = 1;
+const float Brick::WIDTH = 40.0f;
+const float Brick::HEIGHT = 20.0f;
 
-Brick::Brick()
-	: _position(0, 0)
-	, _strength(0)
-{
-}
-
-Brick::Brick(const Position& position, unsigned int strength)
-	:_position(position)
+Brick::Brick(const math::Point2<float>& position, unsigned int strength)
+	: _position(position)
 	, _strength(strength)
 {
 }
 
 Brick::Brick(const Brick& brick)
-	:_position(brick._position)
+	: _position(brick._position)
 	, _strength(brick._strength)
 {
 }
 
-const Position&
+Brick::~Brick()
+{
+}
+
+const math::Point2<float>&
 Brick::getPosition() const
 {
 	return _position;
@@ -35,7 +32,7 @@ Brick::getStrength() const
 }
 
 void
-Brick::setPosition(const Position& position)
+Brick::setPosition(const math::Point2<float>& position)
 {
 	_position = position;
 }
@@ -46,7 +43,28 @@ Brick::setStrength(unsigned int strength)
 	_strength = strength;
 }
 
-bool Brick::isValid() const
+math::Point2<float>&
+Brick::position()
+{
+	return _position;
+}
+
+unsigned int&
+Brick::strength()
+{
+	return _strength;
+}
+
+bool
+Brick::isValid() const
 {
 	return _strength > 0;
+}
+
+bool
+Brick::overlap(const Brick& brick) const
+{
+	return
+		std::abs(_position.getX() - brick._position.getX()) < Brick::WIDTH &&
+		std::abs(_position.getY() - brick._position.getY()) < Brick::HEIGHT;
 }

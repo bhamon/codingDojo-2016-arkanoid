@@ -7,23 +7,21 @@
 class Field
 {
 	private:
-	unsigned int _width;
-	unsigned int _height;
-	std::list<Brick> _brickList;
+	float _width;
+	float _height;
+	std::list<Brick> _bricks;
 
 	public:
-	Field(unsigned int width = 10, unsigned int height = 20);
+	Field(float width, float height);
 
-	unsigned int getHeight() const;
-	unsigned int getWidth() const;
-
-	void setWidth(unsigned int width);
-	void setHeight(unsigned int height);
+	float getWidth() const;
+	float getHeight() const;
 
 	bool addBrick(const Brick& brick);
-	Brick getBrick(const Position& position);
 
 	unsigned int getBrickNumber() const;
+
+	bool canFitInside(const Brick& brick) const;
 
 };
 

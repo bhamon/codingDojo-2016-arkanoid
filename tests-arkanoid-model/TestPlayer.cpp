@@ -21,12 +21,18 @@ namespace tests
 		{
 			Player p("Antoine");
 			p.setName("Romain");
-			p.setLives(2);
 			p.setScore(10);
+			p.setLives(2);
 
 			Assert::AreEqual(std::string("Romain"), p.getName());
-			Assert::AreEqual(2u, p.getLives());
 			Assert::AreEqual(10u, p.getScore());
+			Assert::AreEqual(2u, p.getLives());
+
+			p.score() += 4;
+			p.lives() -= 1;
+
+			Assert::AreEqual(14u, p.getScore());
+			Assert::AreEqual(1u, p.getLives());
 		}
 	};
 }

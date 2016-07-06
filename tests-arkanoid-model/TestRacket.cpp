@@ -10,17 +10,22 @@ namespace tests
 		public:
 		TEST_METHOD(constructor)
 		{
-			Racket r(100);
+			Racket r(10.0f);
 
-			Assert::AreEqual(100u, r.getPosition());
+			Assert::AreEqual(10.0f, r.getPosition(), 0.0001f);
 		}
 
 		TEST_METHOD(setters)
 		{
-			Racket r(100);
-			r.setPosition(251);
+			Racket r(100.0f);
 
-			Assert::AreEqual(251u, r.getPosition());
+			r.setPosition(251.0f);
+
+			Assert::AreEqual(251.0f, r.getPosition(), 0.0001f);
+
+			r.position() += 10.0f;
+
+			Assert::AreEqual(261.0f, r.getPosition(), 0.0001f);
 		}
 	};
 }

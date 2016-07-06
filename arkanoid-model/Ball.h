@@ -1,8 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "Position.h"
-#include "Vector.h"
+#include "Point2.h"
+#include "Vector2.h"
 
 class Ball
 {
@@ -10,18 +10,22 @@ class Ball
 	static const float RADIUS;
 
 	private:
-	Position _position;
-	VectorF _vector;
+	math::Point2<float> _position;
+	math::Vector2<float> _velocity;
 
 	public:
-	Ball(const Position& position, const VectorF &vector);
-	virtual ~Ball();
+	Ball(const math::Point2<float>& position, const math::Vector2<float> &velocity);
+	Ball(const Ball& ball);
+	~Ball();
 
-	const Position& getPosition() const;
-	const VectorF& getVector() const;
+	const math::Point2<float>& getPosition() const;
+	const math::Vector2<float>& getVelocity() const;
 
-	void setPosition(const Position& position);
-	void setVector(const VectorF& vector);
+	void setPosition(const math::Point2<float>& position);
+	void setVelocity(const math::Vector2<float>& velocity);
+
+	math::Point2<float>& position();
+	math::Vector2<float>& velocity();
 };
 
 

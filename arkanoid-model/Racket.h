@@ -3,14 +3,21 @@
 
 class Racket
 {
+	public:
+	static const float WIDTH;
+	static const float HEIGHT;
+
 	private:
-	unsigned int _position;
+	float _position;
 
 	public:
-	Racket(unsigned int position);
+	Racket(float position);
 
-	unsigned int getPosition() const;
-	void setPosition(unsigned int position);
+	float getPosition() const;
+
+	void setPosition(float position);
+
+	float& position();
 };
 
 #endif
