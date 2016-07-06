@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include <arkanoid-model\Calculator.h>
 #include <arkanoid-model\HitRecord.h>
+#include <sstream>
 
 namespace arkanoid
 {
@@ -8,13 +9,62 @@ namespace arkanoid
 		: arkanoid::Window(p_width, p_height, p_title)
 		, m_font(0)
 		, m_quadric(0)
-		, m_ball(math::Point2<float>(10.0f, 10.0f), math::Vector2<float>(0.1f, 0.1f))
-		, m_bricks()
+		, m_ball(math::Point2<float>(400.0f, (500.0f - Racket::OFFSET - Racket::HEIGHT/2 - Ball::RADIUS - 0.1f)), math::Vector2<float>(0.0f, 0.0f))
+		, m_racket(0.0)
+		, m_field(500.0, 500.0)
+		, m_player("Player")
+		, m_game( m_field, m_ball, m_racket, m_player)
+		, m_goLeft(false)
+		, m_goRight(false)
 	{
-		m_bricks.push_back(Brick(math::Point2<float>(150.0f, 150.0f), 3u));
-		m_bricks.push_back(Brick(math::Point2<float>(310.0f, 150.0f), 3u));
-		m_bricks.push_back(Brick(math::Point2<float>(150.0f, 220.0f), 3u));
-		m_bricks.push_back(Brick(math::Point2<float>(310.0f, 310.0f), 3u));
+		// They want to invade us!
+		math::Vector2<float> ref(m_field.getWidth() / 2.0f, m_field.getHeight() / 2.0f);
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * -3.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * -3.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * -2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * -2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -1.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 0.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * -1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -4.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -1.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 0.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 4.0f, Brick::HEIGHT * 0.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -5.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -4.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -1.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 0.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 4.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 5.0f, Brick::HEIGHT * 1.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -5.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -1.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 0.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 5.0f, Brick::HEIGHT * 2.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -5.0f, Brick::HEIGHT * 3.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * 3.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * 3.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 5.0f, Brick::HEIGHT * 3.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -1.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
 
 		glShadeModel(GL_SMOOTH);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -58,50 +108,24 @@ namespace arkanoid
 
 	void MainWindow::animate()
 	{
-		Calculator::move(m_ball, 1.0f);
-
-		while(true)
+		if(m_game.isFinished() == false)
 		{
-			bool hit = false;
-			HitRecord hr;
-			HitRecord lhr;
-
-			if(hit |= Calculator::hit(m_ball, math::Point2<float>(0.0f, 0.0f), math::Point2<float>(400.0f, 0.0f), lhr) && lhr.getRollback() > hr.getRollback())
+			if(m_goLeft)
 			{
-				hr = lhr;
-			}
-			if(hit |= Calculator::hit(m_ball, math::Point2<float>(400.0f, 0.0f), math::Point2<float>(400.0f, 400.0f), lhr) && lhr.getRollback() > hr.getRollback())
-			{
-				hr = lhr;
-			}
-			if(hit |= Calculator::hit(m_ball, math::Point2<float>(400.0f, 400.0f), math::Point2<float>(0.0f, 400.0f), lhr) && lhr.getRollback() > hr.getRollback())
-			{
-				hr = lhr;
-			}
-			if(hit |= Calculator::hit(m_ball, math::Point2<float>(0.0f, 400.0f), math::Point2<float>(0.0f, 0.0f), lhr) && lhr.getRollback() > hr.getRollback())
-			{
-				hr = lhr;
+				m_racket.position() -= 0.2;
 			}
 
-			for(auto brick : m_bricks)
+			if(m_goRight)
 			{
-				if(hit |= Calculator::hit(m_ball, brick, lhr) && lhr.getRollback() > hr.getRollback())
-				{
-					hr = lhr;
-				}
+				m_racket.position() += 0.2;
 			}
 
-			if(hit)
+			if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
 			{
-				m_ball.position() = hr.getNewPosition();
-				//	m_ball.position() += -hr.getRollback() * m_ball.getVelocity();
-				Calculator::bounce(m_ball, hr.getNormal());
-				Calculator::move(m_ball, hr.getRollback() + 0.1f);
+				m_ball.position().x() = m_racket.position(); 
 			}
-			else
-			{
-				break;
-			}
+			
+			m_game.tick();
 		}
 	}
 
@@ -116,8 +140,14 @@ namespace arkanoid
 		glListBase(m_font - 32);
 		glCallLists(8, GL_UNSIGNED_BYTE, "ARKANOID");
 		glRasterPos2f(100.0f, 150.0f);
-		glListBase(m_font - 32);
-		glCallLists(8, GL_UNSIGNED_BYTE, "score: ");
+		std::ostringstream ost;
+		ost << "score: " << m_player.getScore() ;
+		glCallLists(ost.str().length(), GL_UNSIGNED_BYTE, ost.str().c_str());
+		
+		ost.str("");
+		ost << "lives: " << m_player.getLives();
+		glRasterPos2f(400.0f, 150.0f);
+		glCallLists(ost.str().length(), GL_UNSIGNED_BYTE, ost.str().c_str());
 		glPopAttrib();
 
 		glPushMatrix();
@@ -131,27 +161,41 @@ namespace arkanoid
 				glBegin(GL_QUADS);
 				glColor3f(1.0f, 1.0f, 1.0f);
 				glVertex3f(0.0f, 0.0f, 0.0f);
-				glVertex3f(0.0f, 400.0f, 0.0f);
-				glVertex3f(400.0f, 400.0f, 0.0f);
-				glVertex3f(400.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, m_field.getHeight(), 0.0f);
+				glVertex3f(m_field.getWidth(), m_field.getHeight(), 0.0f);
+				glVertex3f(m_field.getWidth(), 0.0f, 0.0f);
 				glEnd();
+
+				glPushMatrix();
+				{
+					glTranslatef(0.0f, m_field.getHeight() - Racket::OFFSET, 0.0f);
+
+					glBegin(GL_QUADS);
+					glColor3f(0.0f, 0.0f, 1.0f);
+					glVertex3f(m_racket.getPosition() - m_racket.WIDTH / 2.0f, -m_racket.HEIGHT, 0.0f);
+					glVertex3f(m_racket.getPosition() + m_racket.WIDTH / 2.0f, -m_racket.HEIGHT, 0.0f);
+					glVertex3f(m_racket.getPosition() + m_racket.WIDTH / 2.0f, 0.0, 0.0f);
+					glVertex3f(m_racket.getPosition() - m_racket.WIDTH / 2.0f, 0.0, 0.0f);
+					glEnd();
+				}
+				glPopMatrix();
 
 				glPushMatrix();
 				{
 					glTranslatef(m_ball.getPosition().getX(), m_ball.getPosition().getY(), 0.0f);
 					glColor3f(1.0f, 0.0f, 0.0f);
-					gluDisk(m_quadric, 0.0, 10.0, 20, 20);
+					gluDisk(m_quadric, 0.0, Ball::RADIUS, 10, 10);
 				}
 				glPopMatrix();
 
-				for(auto brick : m_bricks)
+				for(auto brick : m_field.getListBricks())
 				{
 					glPushMatrix();
 					{
 						glTranslatef(brick.getPosition().getX(), brick.getPosition().getY(), 0.0f);
 
 						glBegin(GL_QUADS);
-						glColor3f(0.0f, 0.0f, 0.0f);
+						glColor3f(brick.getStrength() * 0.4f, 0.0f, 0.0f);
 						glVertex3f(-Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f, 0.0f);
 						glVertex3f(-Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f, 0.0f);
 						glVertex3f(+Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f, 0.0f);
@@ -184,13 +228,36 @@ namespace arkanoid
 
 	void MainWindow::onKeyDown(int p_virtualKey)
 	{
-		if(p_virtualKey == VK_ESCAPE)
+		switch(p_virtualKey)
 		{
-			PostQuitMessage(0);
+			case VK_LEFT:
+				m_goLeft = true;
+				break;
+			case VK_RIGHT:
+				m_goRight = true;
+				break;
 		}
 	}
 
 	void MainWindow::onKeyUp(int p_virtualKey)
 	{
+		switch(p_virtualKey)
+		{
+			case VK_ESCAPE:
+				PostQuitMessage(0);
+				break;
+			case VK_LEFT:
+				m_goLeft = false;
+				break;
+			case VK_RIGHT:
+				m_goRight = false;
+				break;
+			case VK_UP:
+				if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
+				{
+					m_ball.setVelocity(math::Vector2<float>(-0.1f, -0.1f));
+				}
+				break;
+		}
 	}
 };

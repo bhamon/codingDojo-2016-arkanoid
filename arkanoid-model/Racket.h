@@ -6,6 +6,7 @@ class Racket
 	public:
 	static const float WIDTH;
 	static const float HEIGHT;
+	static const float OFFSET;
 
 	private:
 	float _position;

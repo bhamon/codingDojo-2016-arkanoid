@@ -138,9 +138,13 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="FieldLoader.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitRecord.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racket.cpp" />
+    <ClInclude Include="FieldLoader.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="HitRecord.h" />
     <ClInclude Include="Normal2.h" />
     <ClInclude Include="Point2.h" />

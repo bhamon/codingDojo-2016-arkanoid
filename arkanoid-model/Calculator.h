@@ -8,6 +8,8 @@ namespace math { template<class T> class Normal2; }
 class Brick;
 class Ball;
 class HitRecord;
+class Field;
+class Racket;
 
 class Calculator
 {
@@ -36,6 +38,8 @@ class Calculator
 		@returns				The collision state of the ball against the provided brick.
 	*/
 	static bool hit(const Ball& ball, const Brick& brick, HitRecord& hitRecord);
+
+	static bool hit(const Ball& ball, const Racket& racket, const Field& field, HitRecord& hitRecord);
 
 	/*
 		@desc					Tests whether the ball hit with the provided (start , end) segment or not.

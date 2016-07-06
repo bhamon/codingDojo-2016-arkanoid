@@ -8,6 +8,10 @@
 #include "Window.h"
 #include <arkanoid-model\Ball.h>
 #include <arkanoid-model\Brick.h>
+#include <arkanoid-model\Game.h>
+#include <arkanoid-model\Field.h>
+#include <arkanoid-model\Player.h>
+#include <arkanoid-model\Racket.h>
 
 namespace arkanoid
 {
@@ -17,7 +21,12 @@ namespace arkanoid
 		GLuint m_font;
 		GLUquadric* m_quadric;
 		Ball m_ball;
-		std::vector<Brick> m_bricks;
+		Racket m_racket;
+		Field m_field;
+		Player m_player;
+		Game m_game;
+		bool m_goLeft;
+		bool m_goRight;
 
 		public:
 		MainWindow(unsigned int p_width, unsigned int p_height, const std::string& p_title);

@@ -29,6 +29,8 @@ class Brick
 
 	bool isValid() const;
 	bool overlap(const Brick& brick) const;
+
+	bool operator==(const Brick& brick) const;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include <arkanoid-model\Point2.h>
 #include <arkanoid-model\Field.h>
 #include <arkanoid-model\Brick.h>
+#include <list>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -62,6 +63,48 @@ namespace tests
 			Assert::AreEqual(true, field.canFitInside(bIn));
 			Assert::AreEqual(false, field.canFitInside(bOut));
 			Assert::AreEqual(false, field.canFitInside(bCross));
+		}
+
+		TEST_METHOD(getListBricks)
+		{
+			Field field(200.0f, 200.0f);
+			Brick brickA(math::Point2<float>(100.0f, 120.0f), 2);
+			Brick brickB(math::Point2<float>(50.0f, 120.0f), 2);
+			Brick brickC(math::Point2<float>(21.0f, 10.f), 2);
+
+			field.addBrick(brickA);
+			field.addBrick(brickB);
+			field.addBrick(brickC);
+
+			std::list<Brick> listBricks = field.getListBricks();
+
+			auto it = listBricks.begin();
+
+			Assert::AreEqual(true, *it++ == brickA);
+			Assert::AreEqual(true, *it++ == brickB);
+			Assert::AreEqual(true, *it++ == brickC);
+		}
+
+		TEST_METHOD(removeBrick)
+		{
+			Field field(200.0f, 200.0f);
+			Brick brickA(math::Point2<float>(100.0f, 120.0f), 2);
+			Brick brickB(math::Point2<float>(50.0f, 120.0f), 2);
+			Brick brickC(math::Point2<float>(21.0f, 10.f), 2);
+
+			field.addBrick(brickA);
+			field.addBrick(brickB);
+			field.addBrick(brickC);
+
+			field.removeBrick(brickB);
+
+			std::list<Brick> listBricks = field.getListBricks();
+
+			auto it = listBricks.begin();
+
+			Assert::AreEqual(2u, field.getBrickNumber());
+			Assert::AreEqual(true, *it++ == brickA);
+			Assert::AreEqual(true, *it++ == brickC);
 		}
 	};
 }

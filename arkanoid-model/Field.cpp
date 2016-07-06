@@ -41,6 +41,11 @@ bool Field::addBrick(const Brick& brick)
 	return true;
 }
 
+void Field::removeBrick(const Brick& brick)
+{
+	_bricks.remove(brick);
+}
+
 unsigned int Field::getBrickNumber() const
 {
 	return static_cast<unsigned int>(_bricks.size());
@@ -53,4 +58,19 @@ bool Field::canFitInside(const Brick& brick) const
 		brick.getPosition().getX() + Brick::WIDTH / 2.0 < _width &&
 		brick.getPosition().getY() - Brick::HEIGHT / 2.0 >= 0.0f &&
 		brick.getPosition().getY() + Brick::HEIGHT / 2.0 < _height;
+}
+
+const std::list<Brick>& Field::getListBricks() const
+{
+	return _bricks;
+}
+
+std::list<Brick>::iterator Field::begin()
+{
+	return _bricks.begin();
+}
+
+std::list<Brick>::iterator Field::end()
+{
+	return _bricks.end();
 }

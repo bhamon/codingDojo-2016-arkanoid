@@ -7,6 +7,7 @@
 #include "Vector2.h"
 #include "Point2.h"
 #include "Normal2.h"
+#include "Field.h"
 
 void
 Calculator::move(Ball& ball, float factor)
@@ -29,10 +30,70 @@ Calculator::hit(const Ball& ball, const Brick& brick, HitRecord& hitRecord)
 	bool hit = false;
 	HitRecord localHitRecord;
 
-	if(hit |= Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback()) { hitRecord = localHitRecord; }
-	if(hit |= Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback()) { hitRecord = localHitRecord; }
-	if(hit |= Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback()) { hitRecord = localHitRecord; }
-	if(hit |= Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback()) { hitRecord = localHitRecord; }
+	if(Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord; 
+		hit = true;
+	}
+
+	if(Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
+
+	if(Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(+Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
+
+	if(Calculator::hit(ball, brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, +Brick::HEIGHT / 2.0f), brick.getPosition() + math::Vector2<float>(-Brick::WIDTH / 2.0f, -Brick::HEIGHT / 2.0f), localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
+
+	return hit;
+}
+
+bool
+Calculator::hit(const Ball& ball, const Racket& racket, const Field& field, HitRecord& hitRecord)
+{
+	bool hit = false;
+	HitRecord localHitRecord;
+
+	float y = field.getHeight() - Racket::OFFSET;
+
+	//point en bas a gauche
+	math::Point2<float> pt1(racket.getPosition() - Racket::WIDTH / 2, y + Racket::HEIGHT / 2);
+	//point en bas a droite
+	math::Point2<float> pt2(racket.getPosition() + Racket::WIDTH / 2, y + Racket::HEIGHT / 2);
+	//point en haut a gauche
+	math::Point2<float> pt3(racket.getPosition() - Racket::WIDTH / 2, y - Racket::HEIGHT / 2);
+	//point en haut a droite
+	math::Point2<float> pt4(racket.getPosition() + Racket::WIDTH / 2, y - Racket::HEIGHT / 2);
+
+	// collision au dessus de la raquette
+	if(Calculator::hit(ball,  pt3, pt4, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
+
+	// collision à gauche de la raquette
+	if(Calculator::hit(ball, pt1, pt3, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
+
+	// collision à droite de la raquette
+	if(Calculator::hit(ball, pt4, pt2, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
 
 	return hit;
 }
@@ -74,7 +135,7 @@ Calculator::hit(const Ball& ball, const math::Point2<float>& start, const math::
 	// The magnitude of the velocity vector to normalize the rollback factors.
 	float mv = ball.getVelocity().getMagnitude();
 	// Checking that rollback is within the bounds.
-	if(rollback <= 0.0f || rollback >= 1.0f) // Should be >= mv, but doesn't work.
+	if(rollback <= 0.0f || rollback >= mv)
 	{
 		return false;
 	}

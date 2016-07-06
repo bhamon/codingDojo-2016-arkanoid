@@ -18,10 +18,16 @@ class Field
 	float getHeight() const;
 
 	bool addBrick(const Brick& brick);
+	void removeBrick(const Brick& brick);
 
 	unsigned int getBrickNumber() const;
 
 	bool canFitInside(const Brick& brick) const;
+
+	const std::list<Brick>& getListBricks() const;
+
+	std::list<Brick>::iterator begin();
+	std::list<Brick>::iterator end();
 
 };
 

@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TestFieldLoader.cpp" />
     <ClCompile Include="TestGame.cpp" />
     <ClCompile Include="TestRacket.cpp" />
     <ClCompile Include="TestBrick.cpp" />

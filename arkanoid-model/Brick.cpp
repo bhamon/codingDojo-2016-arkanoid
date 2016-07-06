@@ -68,3 +68,10 @@ Brick::overlap(const Brick& brick) const
 		std::abs(_position.getX() - brick._position.getX()) < Brick::WIDTH &&
 		std::abs(_position.getY() - brick._position.getY()) < Brick::HEIGHT;
 }
+
+bool
+Brick::operator==(const Brick& brick) const
+{
+	return _position.getX() == brick.getPosition().getX() && 
+		   _position.getY() == brick.getPosition().getY();
+}
