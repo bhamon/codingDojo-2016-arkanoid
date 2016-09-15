@@ -1,14 +1,14 @@
-#include "MainWindow.h"
+#include <GL/freeglut.h>
+
+#include "GameEngine.h"
 #include <arkanoid-model\Calculator.h>
 #include <arkanoid-model\HitRecord.h>
 #include <sstream>
 
 namespace arkanoid
 {
-	MainWindow::MainWindow(unsigned int p_width, unsigned int p_height, const std::string& p_title)
-		: arkanoid::Window(p_width, p_height, p_title)
-		, m_font(0)
-		, m_quadric(0)
+	GameEngine::GameEngine() :
+		  m_quadric(0)
 		, m_ball(math::Point2<float>(400.0f, (500.0f - Racket::OFFSET - Racket::HEIGHT/2 - Ball::RADIUS - 0.1f)), math::Vector2<float>(0.0f, 0.0f))
 		, m_racket(0.0)
 		, m_field(500.0, 500.0)
@@ -74,50 +74,26 @@ namespace arkanoid
 		glDepthFunc(GL_LEQUAL);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-		m_font = glGenLists(96);
-		HFONT font = CreateFont(
-			-24,								// Height (based on CHARACTER, not CELL)
-			0,									// Cell width
-			0,									// Angle of escapment
-			0,									// Orientation angle
-			FW_BOLD,							// Weight
-			0,									// Italic
-			0,									// Underline
-			0,									// Strikeout
-			ANSI_CHARSET,						// Charset
-			OUT_TT_PRECIS,						// Output precision: select TTF by default
-			CLIP_DEFAULT_PRECIS,				// Clipping precision
-			ANTIALIASED_QUALITY,				// Output quality: antialiased
-			FF_DONTCARE | DEFAULT_PITCH,		// Family and pitch
-			"Bauhaus 93"						// Name
-		);
-
-		HFONT oldfont = static_cast<HFONT>(SelectObject(m_deviceContext, font));
-		wglUseFontBitmaps(m_deviceContext, 32, 96, m_font);
-		SelectObject(m_deviceContext, oldfont);
-		DeleteObject(font);
-
 		m_quadric = gluNewQuadric();
 	}
 
-	MainWindow::~MainWindow()
+	GameEngine::~GameEngine()
 	{
 		gluDeleteQuadric(m_quadric);
-		glDeleteLists(m_font, 96);
 	}
 
-	void MainWindow::animate()
+	void GameEngine::animate()
 	{
 		if(m_game.isFinished() == false)
 		{
 			if(m_goLeft)
 			{
-				m_racket.position() -= 0.2;
+				m_racket.position() -= 2;
 			}
 
 			if(m_goRight)
 			{
-				m_racket.position() += 0.2;
+				m_racket.position() += 2;
 			}
 
 			if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
@@ -129,26 +105,23 @@ namespace arkanoid
 		}
 	}
 
-	void MainWindow::paintScene() const
+	void GameEngine::paintScene() const
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glRasterPos2f(100.0f, 100.0f);
-		glPushAttrib(GL_LIST_BIT);
-		glListBase(m_font - 32);
-		glCallLists(8, GL_UNSIGNED_BYTE, "ARKANOID");
+		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, reinterpret_cast<const unsigned char*>("ARKANOID"));
 		glRasterPos2f(100.0f, 150.0f);
 		std::ostringstream ost;
 		ost << "score: " << m_player.getScore() ;
-		glCallLists(ost.str().length(), GL_UNSIGNED_BYTE, ost.str().c_str());
+		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, reinterpret_cast<const unsigned char*>(ost.str().c_str()));
 		
 		ost.str("");
 		ost << "lives: " << m_player.getLives();
 		glRasterPos2f(400.0f, 150.0f);
-		glCallLists(ost.str().length(), GL_UNSIGNED_BYTE, ost.str().c_str());
-		glPopAttrib();
+		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, reinterpret_cast<const unsigned char*>(ost.str().c_str()));
 
 		glPushMatrix();
 		{
@@ -210,7 +183,7 @@ namespace arkanoid
 		glPopMatrix();
 	}
 
-	void MainWindow::onResize(unsigned int p_width, unsigned int p_height)
+	void GameEngine::onResize(unsigned int p_width, unsigned int p_height)
 	{
 		glViewport(0, 0, p_width, p_height);
 
@@ -226,36 +199,33 @@ namespace arkanoid
 		glLoadIdentity();
 	}
 
-	void MainWindow::onKeyDown(int p_virtualKey)
+	void GameEngine::onKeyDown(int p_virtualKey)
 	{
 		switch(p_virtualKey)
 		{
-			case VK_LEFT:
+			case GLUT_KEY_LEFT:
 				m_goLeft = true;
 				break;
-			case VK_RIGHT:
+			case GLUT_KEY_RIGHT:
 				m_goRight = true;
 				break;
 		}
 	}
 
-	void MainWindow::onKeyUp(int p_virtualKey)
+	void GameEngine::onKeyUp(int p_virtualKey)
 	{
 		switch(p_virtualKey)
 		{
-			case VK_ESCAPE:
-				PostQuitMessage(0);
-				break;
-			case VK_LEFT:
+			case GLUT_KEY_LEFT:
 				m_goLeft = false;
 				break;
-			case VK_RIGHT:
+			case GLUT_KEY_RIGHT:
 				m_goRight = false;
 				break;
-			case VK_UP:
+			case GLUT_KEY_UP:
 				if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
 				{
-					m_ball.setVelocity(math::Vector2<float>(-0.1f, -0.1f));
+					m_ball.setVelocity(math::Vector2<float>(-2.f, -2.f));
 				}
 				break;
 		}

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{628A2981-BE41-3CFB-8108-DE3C215C7628}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\include;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\include;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\include;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\include;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 -BF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 --check-stamp-file F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInitialize.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCCompiler.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\GNUInstallDirs.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\fg_version.h.in;C:\Program Files\CMake\share\cmake-3.6\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFileCXX.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\config.h.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.rc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\freeglutdll.def.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.pc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 -BF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 --check-stamp-file F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInitialize.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCCompiler.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\GNUInstallDirs.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\fg_version.h.in;C:\Program Files\CMake\share\cmake-3.6\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFileCXX.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\config.h.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.rc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\freeglutdll.def.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.pc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 -BF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 --check-stamp-file F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInitialize.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCCompiler.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\GNUInstallDirs.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\fg_version.h.in;C:\Program Files\CMake\share\cmake-3.6\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFileCXX.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\config.h.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.rc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\freeglutdll.def.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.pc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 -BF:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0 --check-stamp-file F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInitialize.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCCompiler.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\3.6.1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\GNUInstallDirs.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\fg_version.h.in;C:\Program Files\CMake\share\cmake-3.6\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.6\Modules\CheckIncludeFileCXX.cmake;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\config.h.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.rc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\src\freeglutdll.def.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\freeglut.pc.in;F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">F:\dev\codingDojo-2016-arkanoid\freeglut-3.0.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/ZERO_CHECK.vcxproj">
+      <Project>63428E63-CBEF-3B96-BBD5-E5827EC3CCE5</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/CallbackMaker_static.vcxproj">
+      <Project>B34484A1-C127-3642-B70C-BB1B5D9D9CFE</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/Fractals_random_static.vcxproj">
+      <Project>4ADB8576-6D19-3560-A384-B0EDD94EC113</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/Fractals_static.vcxproj">
+      <Project>C694C147-7CDF-33C2-95B9-4B4715214D18</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/Lorenz_static.vcxproj">
+      <Project>CB934033-6F71-3002-B6A4-3D6A01E63B74</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/One_static.vcxproj">
+      <Project>805285A7-A3FC-39DE-9A9B-BC1A37F3B893</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/Resizer_static.vcxproj">
+      <Project>7A7FA045-3738-3A2E-9701-7AA1F2263331</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/freeglut_static.vcxproj">
+      <Project>B0876CB5-12D1-3CE2-AE73-AD2EE247A491</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/multi-touch_static.vcxproj">
+      <Project>77E9EE02-75C0-34D8-9802-AA93DFB8F0FF</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/shapes_static.vcxproj">
+      <Project>9349D837-7AC0-39AF-BDD2-179E77B2BAAB</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/smooth_opengl3_static.vcxproj">
+      <Project>D9745631-8EA9-3F94-A99A-CBEDE4D0C63C</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/subwin_static.vcxproj">
+      <Project>C0905A33-8C0B-3FBF-9EFF-BC7FA4739118</Project>
+    </ProjectReference>
+    <ProjectReference Include="F:/dev/codingDojo-2016-arkanoid/freeglut-3.0.0/timer_static.vcxproj">
+      <Project>4FC66F74-322D-355C-9408-84AD3AE091C7</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
