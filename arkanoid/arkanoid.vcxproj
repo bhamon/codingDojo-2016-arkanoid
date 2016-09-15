@@ -86,13 +86,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories);$(SolutionDir)/freeglut-3.0.0/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);FREEGLUT_STATIC</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories);$(SolutionDir)/freeglut-3.0.0/include;$(SolutionDir)/glew-2.0.0/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);FREEGLUT_STATIC;GLEW_STATIC</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)/freeglut-3.0.0/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenGL32.lib;Glu32.lib;freeglut_staticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)/freeglut-3.0.0/$(Platform)/$(Configuration);;$(SolutionDir)/glew-2.0.0/lib/$(Configuration)/$(Platform)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;Glu32.lib;freeglut_staticd.lib;glew32sd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -118,15 +118,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)/freeglut-3.0.0/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);FREEGLUT_STATIC;NDEBUG</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories);$(SolutionDir)/freeglut-3.0.0/include;$(SolutionDir)/glew-2.0.0/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);FREEGLUT_STATIC;NDEBUG;GLEW_STATIC</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)/freeglut-3.0.0/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenGL32.lib;Glu32.lib;freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)/freeglut-3.0.0/$(Platform)/$(Configuration);;$(SolutionDir)/glew-2.0.0/lib/$(Configuration)/$(Platform)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;Glu32.lib;freeglut_static.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>

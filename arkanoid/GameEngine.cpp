@@ -88,12 +88,12 @@ namespace arkanoid
 		{
 			if(m_goLeft)
 			{
-				m_racket.position() -= 2;
+				m_racket.position() -= 0.1;
 			}
 
 			if(m_goRight)
 			{
-				m_racket.position() += 2;
+				m_racket.position() += 0.1;
 			}
 
 			if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
@@ -225,7 +225,7 @@ namespace arkanoid
 			case GLUT_KEY_UP:
 				if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
 				{
-					m_ball.setVelocity(math::Vector2<float>(-2.f, -2.f));
+					m_ball.setVelocity(math::Vector2<float>(-0.1f, -0.1f));
 				}
 				break;
 		}

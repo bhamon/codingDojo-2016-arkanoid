@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <GL/freeglut.h>
 
 #include <iostream>
@@ -60,6 +61,8 @@ int  main(int argc, char *argv[]) {
 		std::cerr << "Unable to create an OpenGl GLUT window" << std::endl;
 		exit(EXIT_FAILURE);
 	}
+
+	glewInit();
 
 	gameEngine = new arkanoid::GameEngine();
 	gameEngine->onResize(WIDTH, HEIGHT);
