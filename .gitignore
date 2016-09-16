@@ -1,5 +1,6 @@
 *.suo
 *.user
+*.opendb
 bin
 build
 Release
