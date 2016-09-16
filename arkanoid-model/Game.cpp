@@ -50,26 +50,26 @@ void Game::tick()
 			hit = true;
 			hr = lhr;
 		}
-		if(Calculator::hit(m_ball, math::Point2<float>(m_field.getWidth(), 0.0f), math::Point2<float>(m_field.getWidth(), m_field.getHeight()), lhr) && lhr.getRollback() > hr.getRollback())
+		if(!hit && Calculator::hit(m_ball, math::Point2<float>(m_field.getWidth(), 0.0f), math::Point2<float>(m_field.getWidth(), m_field.getHeight()), lhr) && lhr.getRollback() > hr.getRollback())
 		{
 			hit = true;
 			hr = lhr;
 		}
 		//Bottom border
-		if(Calculator::hit(m_ball, math::Point2<float>(m_field.getWidth(), m_field.getHeight()), math::Point2<float>(0.0f, m_field.getHeight()), lhr) && lhr.getRollback() > hr.getRollback())
+		if (!hit && Calculator::hit(m_ball, math::Point2<float>(m_field.getWidth(), m_field.getHeight()), math::Point2<float>(0.0f, m_field.getHeight()), lhr) && lhr.getRollback() > hr.getRollback())
 		{
 			m_player.setLives(m_player.getLives() - 1);
 			m_ball.setVelocity(math::Vector2<float>(0.0f, 0.0f));
-			m_ball.position().y() = (m_field.getHeight() - Racket::OFFSET - Racket::HEIGHT / 2 - Ball::RADIUS - 0.1f);
+			m_ball.position().y() = (m_field.getHeight() - Racket::OFFSET - Racket::HEIGHT - Ball::RADIUS);
 			hr = lhr;
 			break;
 		}
-		if(Calculator::hit(m_ball, math::Point2<float>(0.0f, m_field.getHeight()), math::Point2<float>(0.0f, 0.0f), lhr) && lhr.getRollback() > hr.getRollback())
+		if (!hit && Calculator::hit(m_ball, math::Point2<float>(0.0f, m_field.getHeight()), math::Point2<float>(0.0f, 0.0f), lhr) && lhr.getRollback() > hr.getRollback())
 		{
 			hit = true;
 			hr = lhr;
 		}
-		if(Calculator::hit(m_ball, m_racket, m_field, lhr))
+		if (!hit && Calculator::hit(m_ball, m_racket, m_field, lhr))
 		{
 			hit = true;
 			hr = lhr;
@@ -85,7 +85,7 @@ void Game::tick()
 
 		for(Brick& brick : m_field)
 		{
-			if(Calculator::hit(m_ball, brick, lhr) && lhr.getRollback() > hr.getRollback())
+			if (!hit && Calculator::hit(m_ball, brick, lhr) && lhr.getRollback() > hr.getRollback())
 			{
 				brickRef = &brick;
 				hr = lhr;

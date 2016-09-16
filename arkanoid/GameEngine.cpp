@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <GL/freeglut.h>
 
 #include "GameEngine.h"
@@ -5,13 +6,16 @@
 #include <arkanoid-model\HitRecord.h>
 #include <sstream>
 
+const int FIELD_WIDTH = 500;
+const int FIELD_HEIGHT = 900;
+
 namespace arkanoid
 {
 	GameEngine::GameEngine() :
 		  m_quadric(0)
-		, m_ball(math::Point2<float>(400.0f, (500.0f - Racket::OFFSET - Racket::HEIGHT/2 - Ball::RADIUS - 0.1f)), math::Vector2<float>(0.0f, 0.0f))
+		, m_ball(math::Point2<float>(400.0f, (FIELD_HEIGHT - Racket::OFFSET - Racket::HEIGHT - Ball::RADIUS)), math::Vector2<float>(0.0f, 0.0f))
 		, m_racket(0.0)
-		, m_field(500.0, 500.0)
+		, m_field(FIELD_WIDTH, FIELD_HEIGHT)
 		, m_player("Player")
 		, m_game( m_field, m_ball, m_racket, m_player)
 		, m_goLeft(false)
@@ -66,14 +70,6 @@ namespace arkanoid
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
 
-		glShadeModel(GL_SMOOTH);
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-		glClearDepth(1.0f);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
 		m_quadric = gluNewQuadric();
 	}
 
@@ -86,14 +82,15 @@ namespace arkanoid
 	{
 		if(m_game.isFinished() == false)
 		{
+			float racketMove = Racket::WIDTH / 10.f;
 			if(m_goLeft)
 			{
-				m_racket.position() -= 0.1;
+				m_racket.position() -= racketMove;
 			}
 
 			if(m_goRight)
 			{
-				m_racket.position() += 0.1;
+				m_racket.position() += racketMove;
 			}
 
 			if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
@@ -107,7 +104,10 @@ namespace arkanoid
 
 	void GameEngine::paintScene() const
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_MULTISAMPLE);
+
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glLoadIdentity();
 
 		glColor3f(1.0f, 1.0f, 1.0f);
@@ -125,7 +125,7 @@ namespace arkanoid
 
 		glPushMatrix();
 		{
-			glTranslatef(100.0f, 100.0f, 0.0f);
+			glTranslatef(150.0f, 100.0f, 0.0f);
 
 			glPushMatrix();
 			{
@@ -223,9 +223,11 @@ namespace arkanoid
 				m_goRight = false;
 				break;
 			case GLUT_KEY_UP:
+
 				if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
 				{
-					m_ball.setVelocity(math::Vector2<float>(-0.1f, -0.1f));
+					float initialVelocity = Ball::RADIUS / 2;
+					m_ball.setVelocity(math::Vector2<float>(-initialVelocity, -initialVelocity));
 				}
 				break;
 		}

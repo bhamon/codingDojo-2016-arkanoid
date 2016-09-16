@@ -1,6 +1,9 @@
 *.suo
 *.user
 *.opendb
+*.opensdf
+*.obj
+*.pdb
 bin
 build
 Release

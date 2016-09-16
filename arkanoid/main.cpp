@@ -6,17 +6,29 @@
 
 #include "GameEngine.h"
 
-static const int WIDTH = 800;
+static const int WIDTH = 400;
 static const int HEIGHT = 600;
+static const int FPS = 30;
+static const float deltaT = FPS / 1000.f;
 
 static arkanoid::GameEngine *gameEngine = nullptr;
 
 static void glutIdleCallback() {
+	static int previousClock = glutGet(GLUT_ELAPSED_TIME);
+	static int currentClock = glutGet(GLUT_ELAPSED_TIME);
+	static float t;
+
+	currentClock = glutGet(GLUT_ELAPSED_TIME);
+	t = currentClock - previousClock;
+	if (t < deltaT) { return; }
+	else { previousClock = currentClock; }
+
+	gameEngine->animate();
+
 	glutPostRedisplay();
 }
 
 static void glutDrawCallback(void) {
-	gameEngine->animate();
 	gameEngine->paintScene();
 	glutSwapBuffers();
 }
@@ -58,7 +70,7 @@ int  main(int argc, char *argv[]) {
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_MULTISAMPLE);
 	if ((glutCreateWindow("Arkanoid")) == GL_FALSE) {
-		std::cerr << "Unable to create an OpenGl GLUT window" << std::endl;
+		std::cerr << "GLUT : Unable to create an OpenGL window" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -69,6 +81,8 @@ int  main(int argc, char *argv[]) {
 
 	glutDisplayFunc(glutDrawCallback);
 	glutIdleFunc(glutIdleCallback);
+	glutReshapeFunc(glutReshapeCallback);
+
 	glutKeyboardFunc(keyDownCallback);
 	glutKeyboardUpFunc(keyUpCallback);
 	glutSpecialFunc(specialKeyDownCallback);
