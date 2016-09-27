@@ -7,8 +7,7 @@ namespace arkanoid
 {
 	MainWindow::MainWindow(unsigned int p_width, unsigned int p_height, const std::string& p_title)
 		: arkanoid::Window(p_width, p_height, p_title)
-		, m_font(0)
-		, m_quadric(0)
+		, m_paintHelper(m_deviceContext)
 		, m_ball(math::Point2<float>(400.0f, (500.0f - Racket::OFFSET - Racket::HEIGHT/2 - Ball::RADIUS - 0.1f)), math::Vector2<float>(0.0f, 0.0f))
 		, m_racket(0.0)
 		, m_field(500.0, 500.0)
@@ -73,37 +72,10 @@ namespace arkanoid
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-		m_font = glGenLists(96);
-		HFONT font = CreateFont(
-			-24,								// Height (based on CHARACTER, not CELL)
-			0,									// Cell width
-			0,									// Angle of escapment
-			0,									// Orientation angle
-			FW_BOLD,							// Weight
-			0,									// Italic
-			0,									// Underline
-			0,									// Strikeout
-			ANSI_CHARSET,						// Charset
-			OUT_TT_PRECIS,						// Output precision: select TTF by default
-			CLIP_DEFAULT_PRECIS,				// Clipping precision
-			ANTIALIASED_QUALITY,				// Output quality: antialiased
-			FF_DONTCARE | DEFAULT_PITCH,		// Family and pitch
-			"Bauhaus 93"						// Name
-		);
-
-		HFONT oldfont = static_cast<HFONT>(SelectObject(m_deviceContext, font));
-		wglUseFontBitmaps(m_deviceContext, 32, 96, m_font);
-		SelectObject(m_deviceContext, oldfont);
-		DeleteObject(font);
-
-		m_quadric = gluNewQuadric();
 	}
 
 	MainWindow::~MainWindow()
 	{
-		gluDeleteQuadric(m_quadric);
-		glDeleteLists(m_font, 96);
 	}
 
 	void MainWindow::animate()
@@ -136,19 +108,17 @@ namespace arkanoid
 
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glRasterPos2f(100.0f, 100.0f);
-		glPushAttrib(GL_LIST_BIT);
-		glListBase(m_font - 32);
-		glCallLists(8, GL_UNSIGNED_BYTE, "ARKANOID");
+		m_paintHelper.drawText("ARKANOID");
+		
 		glRasterPos2f(100.0f, 150.0f);
 		std::ostringstream ost;
-		ost << "score: " << m_player.getScore() ;
-		glCallLists(ost.str().length(), GL_UNSIGNED_BYTE, ost.str().c_str());
+		ost << "score: " << m_player.getScore();
+		m_paintHelper.drawText(ost.str());
 		
 		ost.str("");
 		ost << "lives: " << m_player.getLives();
 		glRasterPos2f(400.0f, 150.0f);
-		glCallLists(ost.str().length(), GL_UNSIGNED_BYTE, ost.str().c_str());
-		glPopAttrib();
+		m_paintHelper.drawText(ost.str());
 
 		glPushMatrix();
 		{
@@ -184,7 +154,7 @@ namespace arkanoid
 				{
 					glTranslatef(m_ball.getPosition().getX(), m_ball.getPosition().getY(), 0.0f);
 					glColor3f(1.0f, 0.0f, 0.0f);
-					gluDisk(m_quadric, 0.0, Ball::RADIUS, 10, 10);
+					gluDisk(m_paintHelper.getQuadric(), 0.0, Ball::RADIUS, 10, 10);
 				}
 				glPopMatrix();
 

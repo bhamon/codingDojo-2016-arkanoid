@@ -6,6 +6,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "Window.h"
+#include "PaintHelper.h"
 #include <arkanoid-model\Ball.h>
 #include <arkanoid-model\Brick.h>
 #include <arkanoid-model\Game.h>
@@ -18,8 +19,7 @@ namespace arkanoid
 	class MainWindow : public arkanoid::Window
 	{
 		private:
-		GLuint m_font;
-		GLUquadric* m_quadric;
+		PaintHelper m_paintHelper;
 		Ball m_ball;
 		Racket m_racket;
 		Field m_field;
