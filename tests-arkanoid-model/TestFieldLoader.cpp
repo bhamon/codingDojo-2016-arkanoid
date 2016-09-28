@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include <arkanoid-model\Field.h>
+#include <arkanoid-model\FieldLoader.h>
 #include <iostream>
 #include <sstream>
 
