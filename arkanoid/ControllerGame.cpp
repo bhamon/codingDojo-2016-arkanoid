@@ -126,6 +126,10 @@ namespace arkanoid
 
 			m_game.tick();
 		}
+		else
+		{
+			mainWindow().popController();
+		}
 	}
 
 	void ControllerGame::paintScene() const
