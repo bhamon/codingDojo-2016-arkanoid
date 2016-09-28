@@ -146,6 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="ControllerGame.cpp" />
+    <ClCompile Include="ControllerMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PaintHelper.cpp" />
@@ -164,7 +167,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="ControllerGame.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="ControllerMenu.h" />
     <ClInclude Include="PaintHelper.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

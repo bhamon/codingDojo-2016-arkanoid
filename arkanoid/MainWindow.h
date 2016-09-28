@@ -1,18 +1,14 @@
 #ifndef ARKANOID_MAIN_WINDOW_H
 #define ARKANOID_MAIN_WINDOW_H
 
-#include <vector>
+#include <stack>
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "Window.h"
 #include "PaintHelper.h"
-#include <arkanoid-model\Ball.h>
-#include <arkanoid-model\Brick.h>
-#include <arkanoid-model\Game.h>
-#include <arkanoid-model\Field.h>
-#include <arkanoid-model\Player.h>
-#include <arkanoid-model\Racket.h>
+
+namespace arkanoid { class Controller; }
 
 namespace arkanoid
 {
@@ -20,17 +16,16 @@ namespace arkanoid
 	{
 		private:
 		PaintHelper m_paintHelper;
-		Ball m_ball;
-		Racket m_racket;
-		Field m_field;
-		Player m_player;
-		Game m_game;
-		bool m_goLeft;
-		bool m_goRight;
+		std::stack<Controller*> m_controllers;
 
 		public:
 		MainWindow(unsigned int p_width, unsigned int p_height, const std::string& p_title);
 		~MainWindow();
+
+		inline const PaintHelper& getPaintHelper() const;
+
+		void pushController(Controller* p_controller);
+		void popController();
 
 		void animate();
 
@@ -39,6 +34,14 @@ namespace arkanoid
 		virtual void onKeyDown(int p_virtualKey);
 		virtual void onKeyUp(int p_virtualKey);
 	};
+}
+
+namespace arkanoid
+{
+	const PaintHelper& MainWindow::getPaintHelper() const
+	{
+		return m_paintHelper;
+	}
 }
 
 #endif
