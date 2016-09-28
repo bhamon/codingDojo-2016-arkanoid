@@ -7,6 +7,8 @@
 #include <gl/GLU.h>
 #include "Window.h"
 #include "PaintHelper.h"
+#include "arkanoid-model\SettingsManager.h"
+#include "arkanoid-model\Dictionnary.h"
 
 namespace arkanoid { class Controller; }
 
@@ -16,6 +18,9 @@ namespace arkanoid
 	{
 		private:
 		PaintHelper m_paintHelper;
+		SettingsManager m_settingsManager;
+		Dictionnary m_dict;
+
 		std::stack<Controller*> m_controllers;
 
 		public:
@@ -26,6 +31,11 @@ namespace arkanoid
 
 		void pushController(Controller* p_controller);
 		void popController();
+
+		SettingsManager& getSettingsManager();
+
+		Dictionnary& getDictionnary();
+		const Dictionnary& getDictionnary() const;
 
 		void animate();
 

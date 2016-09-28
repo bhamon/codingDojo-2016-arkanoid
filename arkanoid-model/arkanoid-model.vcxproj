@@ -137,17 +137,24 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Calculator.cpp" />
+    <ClCompile Include="Dictionnary.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FieldLoader.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitRecord.cpp" />
+    <ClCompile Include="MultiPlayerGame.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racket.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
+    <ClInclude Include="Dictionnary.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="FieldLoader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HitRecord.h" />
+    <ClInclude Include="MultiPlayerGame.h" />
     <ClInclude Include="Normal2.h" />
     <ClInclude Include="Point2.h" />
+    <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>

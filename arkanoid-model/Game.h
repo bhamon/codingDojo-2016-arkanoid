@@ -9,7 +9,7 @@
 class Game
 {
 
-	private:
+	protected:
 
 		Racket &m_racket;
 		Ball &m_ball;
@@ -19,16 +19,16 @@ class Game
 	public:
 
 	Game(Field &field, Ball &ball, Racket &racket, Player &player);
-		~Game();
+	virtual ~Game();
 
-		void tick();
+		virtual void tick();
 
-		const Racket & getRacket() const;
+		const Racket & getRacket1() const;
 		const Ball & getBall() const;
 		const Field & getField() const;
-		const Player & getPlayer() const;
+		const Player & getPlayer1() const;
 
-		bool isFinished();
+		virtual bool isFinished();
 };
 
 

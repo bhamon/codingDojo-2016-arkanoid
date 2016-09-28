@@ -1,6 +1,8 @@
 #ifndef RACKET_H
 #define RACKET_H
 
+#include "Point2.h"
+
 class Racket
 {
 	public:
@@ -9,16 +11,16 @@ class Racket
 	static const float OFFSET;
 
 	private:
-	float _position;
+	math::Point2<float> _position;
 
 	public:
-	Racket(float position);
+	Racket(const math::Point2<float>& position);
 
-	float getPosition() const;
+	math::Point2<float> getPosition() const;
 
-	void setPosition(float position);
+	void setPosition(const math::Point2<float> &position);
 
-	float& position();
+	math::Point2<float>& position();
 };
 
 #endif

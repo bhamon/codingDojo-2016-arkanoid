@@ -34,5 +34,13 @@ namespace tests
 			Assert::AreEqual(14u, p.getScore());
 			Assert::AreEqual(1u, p.getLives());
 		}
+
+		TEST_METHOD(equality)
+		{
+			Player p1("titi");
+			Player p2("titi");
+
+			Assert::IsTrue(p1 == p2);
+		};
 	};
 }

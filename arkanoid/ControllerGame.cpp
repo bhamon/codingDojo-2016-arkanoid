@@ -4,21 +4,23 @@
 #include <sstream>
 #include "MainWindow.h"
 #include "ControllerGame.h"
-
+#include "arkanoid-model/FieldLoader.h"
 namespace arkanoid
 {
-	ControllerGame::ControllerGame(MainWindow& p_mainWindow)
+	ControllerGame::ControllerGame(MainWindow& p_mainWindow, std::istream& file)
 		: Controller(p_mainWindow)
 		, m_ball(math::Point2<float>(400.0f, (500.0f - Racket::OFFSET - Racket::HEIGHT / 2 - Ball::RADIUS - 0.1f)), math::Vector2<float>(0.0f, 0.0f))
-		, m_racket(0.0)
+		, m_racket(math::Point2<float>(.0f, 500.0f-Racket::OFFSET))
 		, m_field(500.0, 500.0)
 		, m_player("Joueur")
 		, m_game(m_field, m_ball, m_racket, m_player)
 		, m_goLeft(false)
 		, m_goRight(false)
 	{
+		FieldLoader::load(file, m_field);
+
 		// They want to invade us!
-		math::Vector2<float> ref(m_field.getWidth() / 2.0f, m_field.getHeight() / 2.0f);
+		/*math::Vector2<float> ref(m_field.getWidth() / 2.0f, m_field.getHeight() / 2.0f);
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -3.0f, Brick::HEIGHT * -3.0f) + ref, 2u));
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 3.0f, Brick::HEIGHT * -3.0f) + ref, 2u));
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * -2.0f) + ref, 2u));
@@ -64,7 +66,7 @@ namespace arkanoid
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -2.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * -1.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
 		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 1.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
-		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * 4.0f) + ref, 2u));
+		m_field.addBrick(Brick(math::Point2<float>(Brick::WIDTH * 2.0f, Brick::HEIGHT * 4.0f) + ref, 2u));*/
 	}
 
 	ControllerGame::~ControllerGame()
@@ -111,17 +113,17 @@ namespace arkanoid
 		{
 			if(m_goLeft)
 			{
-				m_racket.position() -= 0.2f;
+				m_racket.position().setX(m_racket.position().getX() - 0.2f);
 			}
 
 			if(m_goRight)
 			{
-				m_racket.position() += 0.2f;
+				m_racket.position().setX(m_racket.position().getX() + 0.2f);
 			}
 
 			if((m_ball.getVelocity().getX() == 0.0f) && (m_ball.getVelocity().getY() == 0.0f))
 			{
-				m_ball.position().x() = m_racket.position();
+				m_ball.position().x() = m_racket.position().getX();
 			}
 
 			m_game.tick();
@@ -144,7 +146,7 @@ namespace arkanoid
 		getMainWindow().getPaintHelper().drawText(ost.str());
 
 		ost.str("");
-		ost << "lives: " << m_player.getLives();
+		ost << getMainWindow().getDictionnary().translate(Dictionnary::E_LIFE) << m_player.getLives();
 		glRasterPos2f(400.0f, 150.0f);
 		getMainWindow().getPaintHelper().drawText(ost.str());
 

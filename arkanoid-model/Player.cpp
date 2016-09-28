@@ -11,6 +11,11 @@ Player::~Player()
 {
 }
 
+bool Player::operator==(const Player& p) const
+{
+	return _name == p._name ;
+}
+
 const std::string &
 Player::getName() const
 {

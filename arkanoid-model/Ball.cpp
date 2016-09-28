@@ -5,12 +5,14 @@ const float Ball::RADIUS = 10.0f;
 Ball::Ball(const math::Point2<float>& position, const math::Vector2<float>& velocity)
 	: _position(position)
 	, _velocity(velocity)
+	, _owner(nullptr)
 {
 }
 
 Ball::Ball(const Ball& ball)
 	: _position(ball._position)
 	, _velocity(ball._velocity)
+	, _owner(nullptr)
 {
 }
 
@@ -39,6 +41,18 @@ void
 Ball::setVelocity(const math::Vector2<float>& velocity)
 {
 	_velocity = velocity;
+}
+
+void 
+Ball::setOwner(const Player* player)
+{
+	_owner = player;
+}
+
+const Player*
+Ball::getOwner() const
+{
+	return _owner ;
 }
 
 math::Point2<float>&

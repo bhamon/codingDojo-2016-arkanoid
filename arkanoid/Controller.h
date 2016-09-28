@@ -19,7 +19,7 @@ namespace arkanoid
 
 		virtual void onKeyDown(int p_virtualKey) = 0;
 		virtual void onKeyUp(int p_virtualKey) = 0;
-		virtual void animate() = 0;
+		virtual void animate() {}
 		virtual void paintScene() const = 0;
 	};
 }

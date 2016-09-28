@@ -159,6 +159,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TestDictionnary.cpp" />
+    <ClCompile Include="TestMultiPlayerGame.cpp" />
+    <ClCompile Include="TestSettingsManager.cpp" />
     <ClCompile Include="TestFieldLoader.cpp" />
     <ClCompile Include="TestGame.cpp" />
     <ClCompile Include="TestRacket.cpp" />

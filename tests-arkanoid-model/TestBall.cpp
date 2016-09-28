@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include <arkanoid-model\Ball.h>
+#include <arkanoid-model\Player.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -70,6 +71,19 @@ namespace tests
 
 			Assert::AreEqual(-4.0f, ball.getVelocity().getX(), 0.0001f);
 			Assert::AreEqual(8.0f, ball.getVelocity().getY(), 0.0001f);
+		}
+
+		TEST_METHOD(setOwner)
+		{
+			math::Point2<float> p(101.0f, 10.0f);
+			math::Vector2<float> v1(1.0f, 2.0f);
+			Ball ball(p, v1);
+
+			Player playerA("Toto");
+
+			ball.setOwner(&playerA);
+
+			Assert::IsTrue(playerA == *ball.getOwner());
 		}
 	};
 }

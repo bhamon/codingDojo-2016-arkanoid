@@ -63,19 +63,26 @@ Calculator::hit(const Ball& ball, const Racket& racket, const Field& field, HitR
 	bool hit = false;
 	HitRecord localHitRecord;
 
-	float y = field.getHeight() - Racket::OFFSET;
+	//float y = field.getHeight() - Racket::OFFSET;
 
 	//point en bas a gauche
-	math::Point2<float> pt1(racket.getPosition() - Racket::WIDTH / 2, y + Racket::HEIGHT / 2);
+	math::Point2<float> pt1(racket.getPosition().getX() - Racket::WIDTH / 2, racket.getPosition().getY() + Racket::HEIGHT / 2);
 	//point en bas a droite
-	math::Point2<float> pt2(racket.getPosition() + Racket::WIDTH / 2, y + Racket::HEIGHT / 2);
+	math::Point2<float> pt2(racket.getPosition().getX() + Racket::WIDTH / 2, racket.getPosition().getY() + Racket::HEIGHT / 2);
 	//point en haut a gauche
-	math::Point2<float> pt3(racket.getPosition() - Racket::WIDTH / 2, y - Racket::HEIGHT / 2);
+	math::Point2<float> pt3(racket.getPosition().getX() - Racket::WIDTH / 2, racket.getPosition().getY() - Racket::HEIGHT / 2);
 	//point en haut a droite
-	math::Point2<float> pt4(racket.getPosition() + Racket::WIDTH / 2, y - Racket::HEIGHT / 2);
+	math::Point2<float> pt4(racket.getPosition().getX() + Racket::WIDTH / 2, racket.getPosition().getY() - Racket::HEIGHT / 2);
 
 	// collision au dessus de la raquette
 	if(Calculator::hit(ball,  pt3, pt4, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	{
+		hitRecord = localHitRecord;
+		hit = true;
+	}
+
+	// collision au dessous de la raquette
+	if(Calculator::hit(ball, pt1, pt2, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
 	{
 		hitRecord = localHitRecord;
 		hit = true;

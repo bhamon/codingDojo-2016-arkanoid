@@ -14,6 +14,8 @@ class Player
 	Player(const std::string &name);
 	virtual ~Player();
 
+	bool operator==(const Player& p) const ;
+
 	const std::string& getName() const;
 	unsigned int getScore() const;
 	unsigned int getLives() const;

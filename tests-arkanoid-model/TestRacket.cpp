@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include <arkanoid-model\Racket.h>
+#include <arkanoid-model\Point2.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -10,22 +11,20 @@ namespace tests
 		public:
 		TEST_METHOD(constructor)
 		{
-			Racket r(10.0f);
+			math::Point2<float> racketPos(10.0f, 400.0f - Racket::OFFSET);
+			Racket r(racketPos);
 
-			Assert::AreEqual(10.0f, r.getPosition(), 0.0001f);
+			Assert::IsTrue(r.getPosition() == racketPos);
 		}
 
 		TEST_METHOD(setters)
 		{
-			Racket r(100.0f);
+			math::Point2<float> racketPos(10.0f, 400.0f - Racket::OFFSET);
+			Racket r(racketPos);
 
-			r.setPosition(251.0f);
+			r.position() += math::Point2<float>(10.0f, 0.0f);
 
-			Assert::AreEqual(251.0f, r.getPosition(), 0.0001f);
-
-			r.position() += 10.0f;
-
-			Assert::AreEqual(261.0f, r.getPosition(), 0.0001f);
+			Assert::AreEqual(261.0f, r.getPosition().getX(), 0.0001f);
 		}
 	};
 }

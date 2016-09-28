@@ -83,4 +83,19 @@ namespace arkanoid
 	{
 		m_controllers.top()->onKeyUp(p_virtualKey);
 	}
+
+	SettingsManager& MainWindow::getSettingsManager()
+	{
+		return m_settingsManager;
+	}
+
+	Dictionnary& MainWindow::getDictionnary()
+	{
+		return m_dict;
+	}
+
+	const Dictionnary& MainWindow::getDictionnary() const
+	{
+		return m_dict;
+	}
 };

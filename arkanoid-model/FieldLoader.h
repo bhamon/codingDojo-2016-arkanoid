@@ -1,7 +1,7 @@
 #ifndef FIELD_LOADER_H
 #define FIELD_LOADER_H
 
-#include <iostream>
+#include <istream>
 
 class Field;
 

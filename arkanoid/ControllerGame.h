@@ -22,7 +22,7 @@ namespace arkanoid
 		bool m_goRight;
 
 		public:
-		ControllerGame(MainWindow& p_mainWindow);
+		ControllerGame(MainWindow& p_mainWindow, std::istream& file);
 		virtual ~ControllerGame();
 
 		virtual void onKeyDown(int p_virtualKey);
