@@ -53,6 +53,7 @@ namespace arkanoid
 					}
 					break;
 					case MenuItem::TWO_PLAYERS:
+						mainWindow().pushController(new ControllerLevel(mainWindow(), true));
 						break;
 					case MenuItem::SETTINGS:
 					{

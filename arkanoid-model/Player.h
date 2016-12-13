@@ -23,6 +23,8 @@ class Player
 	void setName(const std::string& name);
 	void setScore(unsigned int score);
 	void setLives(unsigned int lives);
+	void lostOneLife();
+	void incrementScore();
 
 	unsigned int& score();
 	unsigned int& lives();

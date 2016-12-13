@@ -2,112 +2,114 @@
 #include "Calculator.h"
 #include "HitRecord.h"
 
-Game::Game(Field &field, Ball &ball, Racket &racket, Player &player) :
-m_field(field), m_ball(ball), m_racket(racket), m_player(player)
+Game::Game()
+	: m_pField(nullptr)
+	, m_pBall(nullptr)
+	, m_pRacket(nullptr)
+	, m_pPlayer(nullptr)
+{
+	//m_ball.setOwner(&m_player);
+}
+
+Game::~Game()
 {
 }
 
-const Field & Game::getField() const
+void Game::setRacket(Racket* pRacket)
 {
-	return m_field;
+	m_pRacket = pRacket;
 }
 
-const Ball & Game::getBall() const
+void Game::setBall(Ball* pBall)
 {
-	return m_ball;
+	m_pBall = pBall;
 }
 
-const Racket &Game::getRacket1() const
+void Game::setField(Field* pField)
 {
-	return m_racket;
+	m_pField = pField;
 }
 
-const Player &Game::getPlayer1() const
+void Game::setPlayer(Player* pPlayer)
 {
-	return m_player;
+	m_pPlayer = pPlayer;
 }
+
+const Field* Game::getField() const
+{
+	return m_pField;
+}
+
+const Ball* Game::getBall() const
+{
+	return m_pBall;
+}
+
+const Racket* Game::getRacket() const
+{
+	return m_pRacket;
+}
+
+const Player* Game::getPlayer() const
+{
+	return m_pPlayer;
+}
+
 
 void Game::tick()
 {
-	Calculator::move(m_ball, 1.0f);
+	ballMove();
 
-	if(m_racket.getPosition().getX() > m_field.getWidth() - m_racket.WIDTH / 2)
-		m_racket.position().setX(m_field.getWidth() - m_racket.WIDTH / 2);
+	forceRacketIntoField();
 
-	if(m_racket.getPosition().getX() < m_racket.WIDTH / 2)
-		m_racket.position().setX( m_racket.WIDTH / 2);
-
-	while(true)
+	while (true)
 	{
 		bool hit = false;
-		Brick *brickRef = 0;
+		Brick* pBrickRef = nullptr;
 
 		HitRecord hr;
 		HitRecord lhr;
 
-		if(Calculator::hit(m_ball, math::Point2<float>(0.0f, 0.0f), math::Point2<float>(m_field.getWidth(), 0.0f), lhr) && lhr.getRollback() > hr.getRollback())
+		if (hitTopField(lhr) == true && lhr.getRollback() > hr.getRollback())
 		{
 			hit = true;
 			hr = lhr;
 		}
-		if(Calculator::hit(m_ball, math::Point2<float>(m_field.getWidth(), 0.0f), math::Point2<float>(m_field.getWidth(), m_field.getHeight()), lhr) && lhr.getRollback() > hr.getRollback())
+		if (hitRightField(lhr) == true && lhr.getRollback() > hr.getRollback())
 		{
 			hit = true;
 			hr = lhr;
 		}
 		//Bottom border
-		if(Calculator::hit(m_ball, math::Point2<float>(m_field.getWidth(), m_field.getHeight()), math::Point2<float>(0.0f, m_field.getHeight()), lhr) && lhr.getRollback() > hr.getRollback())
+		if (hitBottomField(lhr) == true && lhr.getRollback() > hr.getRollback())
 		{
-			m_player.setLives(m_player.getLives() - 1);
-			m_ball.setVelocity(math::Vector2<float>(0.0f, 0.0f));
-			m_ball.position().y() = (m_field.getHeight() - Racket::OFFSET - Racket::HEIGHT / 2 - Ball::RADIUS - 0.1f);
+			setBallOwner();
+			ballExit();
 			hr = lhr;
 			break;
 		}
-		if(Calculator::hit(m_ball, math::Point2<float>(0.0f, m_field.getHeight()), math::Point2<float>(0.0f, 0.0f), lhr) && lhr.getRollback() > hr.getRollback())
+		if (hitLeftField(lhr) && lhr.getRollback() > hr.getRollback())
 		{
 			hit = true;
 			hr = lhr;
 		}
-		if(Calculator::hit(m_ball, m_racket, m_field, lhr))
-		{
-			hit = true;
-			hr = lhr;
-			float x = (hr.getHitPoint().getX() - m_racket.getPosition().getX()) / Racket::WIDTH;
-			if(x > 0.5f) x = 0.5f;
-			if(x < -0.5f) x = -0.5f;
-			math::Normal2<float> norm = hr.getNormal() ;
-			const float coef = 1.0f ;
-			norm.setX(norm.getX() + (x * coef)) ;
-			norm.normalize() ;
-			hr.setNormal(norm) ;
-		}
 
-		for(Brick& brick : m_field)
+		hitRacket(lhr, hr, hit);
+
+		pBrickRef = hitBrick(lhr, hr, hit);
+
+		if (hit)
 		{
-			if(Calculator::hit(m_ball, brick, lhr) && lhr.getRollback() > hr.getRollback())
+			setBallPosition(hr);
+
+			if (pBrickRef != nullptr)
 			{
-				brickRef = &brick;
-				hr = lhr;
-				hit = true;
-			}
-		}
+				pBrickRef->strength()--;
+				incrementScore();
 
-		if(hit)
-		{
-			m_ball.position() = hr.getNewPosition();
-			//m_ball.position() += -hr.getRollback() * m_ball.getVelocity();
-			Calculator::bounce(m_ball, hr.getNormal());
-			Calculator::move(m_ball, hr.getRollback() + 0.1f);
-
-			if(brickRef)
-			{
-				brickRef->strength()--;
-
-				if(brickRef->strength() == 0)
+				if (pBrickRef->strength() == 0)
 				{
-					m_field.removeBrick(*brickRef);
-					m_player.setScore(m_player.getScore() + 1);
+					removeBrick(pBrickRef);
 				}
 			}
 		}
@@ -117,15 +119,135 @@ void Game::tick()
 		}
 
 	}
-
 }
 
-Game::~Game()
+void Game::ballMove()
 {
+	Calculator::move(*m_pBall, 1.0f);
 }
 
-bool 
-Game::isFinished()
+void Game::forceRacketIntoField(Racket* pRacket)
 {
-	return m_field.getBrickNumber() == 0 || m_player.getLives() == 0;
+	if (pRacket->right() > m_pField->getWidth())
+		pRacket->position().setX(m_pField->getWidth() - Racket::WIDTH / 2.f);
+
+	if (pRacket->left() < 0.f)
+		pRacket->position().setX(Racket::WIDTH / 2.f);
+}
+
+void Game::forceRacketIntoField()
+{
+	forceRacketIntoField(m_pRacket);
+}
+
+bool Game::hitTopField(HitRecord& lhr) const
+{
+	return Calculator::hit(*m_pBall, math::Point2<float>(0.0f, 0.0f), math::Point2<float>(m_pField->getWidth(), 0.0f), lhr);
+}
+
+bool Game::hitRightField(HitRecord& lhr) const
+{
+	return Calculator::hit(*m_pBall, math::Point2<float>(m_pField->getWidth(), 0.0f), math::Point2<float>(m_pField->getWidth(), m_pField->getHeight()), lhr);
+}
+
+bool Game::hitBottomField(HitRecord& lhr) const
+{
+	return Calculator::hit(*m_pBall, math::Point2<float>(m_pField->getWidth(), m_pField->getHeight()), math::Point2<float>(0.0f, m_pField->getHeight()), lhr);
+}
+
+bool Game::hitLeftField(HitRecord& lhr) const
+{
+	return Calculator::hit(*m_pBall, math::Point2<float>(0.0f, m_pField->getHeight()), math::Point2<float>(0.0f, 0.0f), lhr);
+}
+
+void Game::hitRacket(const Player* pPlayer, const Racket* pRacket, HitRecord& lhr, HitRecord& hr, bool& hit)
+{
+	if (Calculator::hit(*m_pBall, *pRacket, *m_pField, lhr) == true)
+	{
+		hit = true;
+		hr = lhr;
+		float x = (hr.getHitPoint().getX() - pRacket->getPosition().getX()) / Racket::WIDTH;
+		if (x > 0.5f) x = 0.5f;
+		if (x < -0.5f) x = -0.5f;
+		math::Normal2<float> norm = hr.getNormal();
+		const float coef = 1.0f;
+		norm.setX(norm.getX() + (x * coef));
+		norm.normalize();
+		hr.setNormal(norm);
+		setBallOwner(pPlayer);
+	}
+}
+
+void Game::hitRacket(HitRecord& lhr, HitRecord& hr, bool& hit)
+{
+	hitRacket(m_pPlayer, m_pRacket, lhr, hr, hit);
+}
+
+void Game::setBallOwner(const Player* pPlayer)
+{
+	if (m_pBall != nullptr)
+	{
+		m_pBall->setOwner(pPlayer);
+	}
+}
+
+Brick* Game::hitBrick(HitRecord& lhr, HitRecord& hr, bool& hit) const
+{
+	Brick* pBrick = nullptr;
+	for (Brick& brick : *m_pField)
+	{
+		if (Calculator::hit(*m_pBall, brick, lhr) && lhr.getRollback() > hr.getRollback())
+		{
+			pBrick = &brick;
+			hr = lhr;
+			hit = true;
+		}
+	}
+	return pBrick;
+}
+
+void Game::setBallPosition(const HitRecord& hr)
+{
+	m_pBall->position() = hr.getNewPosition();
+	Calculator::bounce(*m_pBall, hr.getNormal());
+	Calculator::move(*m_pBall, hr.getRollback() + 0.1f);
+}
+
+void Game::setBallOwner()
+{
+	setBallOwner(m_pPlayer);
+}
+
+void Game::incrementScore(Player* pPlayer)
+{
+	if (m_pBall->getOwner() == pPlayer)
+	{
+		pPlayer->incrementScore();
+	}
+}
+
+void Game::incrementScore()
+{
+	incrementScore(m_pPlayer);
+}
+
+void Game::removeBrick(const Brick* pBrick)
+{
+	m_pField->removeBrick(*pBrick);
+}
+
+void Game::ballExit(Player* pPlayer)
+{
+	pPlayer->lostOneLife();
+	m_pBall->setVelocity(math::Vector2<float>(0.0f, 0.0f));
+}
+
+void Game::ballExit()
+{
+	ballExit(m_pPlayer);
+}
+
+bool Game::isFinished() const
+{
+	return m_pField->getBrickNumber() == 0 || m_pPlayer->getLives() == 0;
 }

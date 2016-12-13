@@ -14,11 +14,12 @@ namespace arkanoid
 
 	class ControllerLevel : public arkanoid::Controller
 	{
-		private:
+	private:
 		LevelItem m_level;
+		bool m_multi;
 
-		public:
-		ControllerLevel(MainWindow& p_mainWindow);
+	public:
+		ControllerLevel(MainWindow& p_mainWindow, bool multi = false);
 		virtual ~ControllerLevel();
 
 		virtual void onKeyDown(int p_virtualKey);

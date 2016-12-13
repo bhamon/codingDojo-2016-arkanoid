@@ -48,6 +48,9 @@
     <ClCompile Include="ControllerLanguages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ControllerMultiGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico">
@@ -85,6 +88,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ControllerLanguages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerMultiGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,6 +18,7 @@ class Point2 {
 		inline Point2(const Point2<T>& p_point);
 
 		inline Point2<T>& operator=(const Point2<T>& p_point);
+		inline bool operator==(const Point2<T>& p_point) const;
 
 		template<class U> inline operator Point2<U>() const;
 
@@ -81,6 +82,13 @@ inline Point2<T>& Point2<T>::operator=(const Point2<T>& p_point) {
 	m_data[1] = p_point.m_data[1];
 	return *this;
 }
+
+template<class T>
+inline bool Point2<T>::operator==(const Point2<T>& p_point) const
+{
+	return m_data[0] == p_point.m_data[0] && m_data[1] == p_point.m_data[1];
+}
+
 
 template<class T>
 template<class U>

@@ -52,6 +52,10 @@ namespace tests
 			Assert::AreEqual(1.0f, brick.getPosition().getY(), 0.0001f);
 			Assert::AreEqual(1u, brick.getStrength());
 			Assert::AreEqual(true, brick.isValid());
+			Assert::AreEqual(-9.0f - (Brick::WIDTH / 2.f), brick.left(), 1e-6f);
+			Assert::AreEqual(-9.0f + (Brick::WIDTH / 2.f), brick.right(), 1e-6f);
+			Assert::AreEqual(1.0f - (Brick::HEIGHT / 2.f), brick.top(), 1e-6f);
+			Assert::AreEqual(1.0f + (Brick::HEIGHT / 2.f), brick.bottom(), 1e-6f);
 		}
 
 		TEST_METHOD(setStrength)

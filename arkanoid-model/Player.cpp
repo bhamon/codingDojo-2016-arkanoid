@@ -52,6 +52,19 @@ Player::setLives(unsigned int lives)
 	_lives = lives;
 }
 
+void Player::lostOneLife()
+{
+	if (_lives > 0)
+	{
+		--_lives;
+	}
+}
+
+void Player::incrementScore()
+{
+	++_score;
+}
+
 unsigned int& Player::score()
 {
 	return _score;

@@ -5,22 +5,27 @@
 
 class Racket
 {
-	public:
+public:
 	static const float WIDTH;
 	static const float HEIGHT;
 	static const float OFFSET;
 
-	private:
+private:
 	math::Point2<float> _position;
 
-	public:
+public:
 	Racket(const math::Point2<float>& position);
 
-	math::Point2<float> getPosition() const;
+	const math::Point2<float>& getPosition() const;
 
 	void setPosition(const math::Point2<float> &position);
 
 	math::Point2<float>& position();
+
+	float top() const;
+	float bottom() const;
+	float right() const;
+	float left() const;
 };
 
 #endif

@@ -5,15 +5,15 @@
 
 class Brick
 {
-	public:
+public:
 	static const float WIDTH;
 	static const float HEIGHT;
 
-	private:
+private:
 	math::Point2<float> _position;
 	unsigned int _strength;
 
-	public:
+public:
 	Brick(const math::Point2<float>& position, unsigned int strength);
 	Brick(const Brick& brick);
 	~Brick();
@@ -22,6 +22,11 @@ class Brick
 	unsigned int getStrength() const;
 
 	void setPosition(const math::Point2<float>& position);
+	float top() const;
+	float bottom() const;
+	float right() const;
+	float left() const;
+
 	void setStrength(unsigned int strength);
 
 	math::Point2<float>& position();

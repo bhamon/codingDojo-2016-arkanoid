@@ -5,12 +5,14 @@
 #include "MainWindow.h"
 #include "ControllerLevel.h"
 #include "ControllerGame.h"
+#include "ControllerMultiGame.h"
 
 namespace arkanoid
 {
-	ControllerLevel::ControllerLevel(MainWindow& p_mainWindow)
+	ControllerLevel::ControllerLevel(MainWindow& p_mainWindow, bool multi)
 		: Controller(p_mainWindow)
 		, m_level(LevelItem::LEVEL_1)
+		, m_multi(multi)
 	{
 	}
 
@@ -48,14 +50,30 @@ namespace arkanoid
 				{
 					case LevelItem::LEVEL_1:
 					{
-						std::ifstream str("Levels\\Level01.txt");
-						mainWindow().pushController(new ControllerGame(mainWindow(), str));
+						if (m_multi == false)
+						{
+							std::ifstream str("Levels\\Level01.txt");
+							mainWindow().pushController(new ControllerGame(mainWindow(), str));
+						}
+						else
+						{
+							std::ifstream str("Levels\\Level01Multi.txt");
+							mainWindow().pushController(new ControllerMultiGame(mainWindow(), str));
+						}
 					}
 					break;
 					case LevelItem::LEVEL_2:
 					{
-						std::ifstream str("Levels\\Level02.txt");
-						mainWindow().pushController(new ControllerGame(mainWindow(), str));
+						if (m_multi == false)
+						{
+							std::ifstream str("Levels\\Level02.txt");
+							mainWindow().pushController(new ControllerGame(mainWindow(), str));
+						}
+						else
+						{
+							std::ifstream str("Levels\\Level02Multi.txt");
+							mainWindow().pushController(new ControllerMultiGame(mainWindow(), str));
+						}
 					}
 					break;
 					case LevelItem::RETOUR:

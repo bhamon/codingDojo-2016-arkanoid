@@ -6,20 +6,21 @@
 class MultiPlayerGame : public Game
 {
 
-	private:
-	Racket &m_racket2;
-	Player &m_player2;
+private:
+	Racket* m_pRacket2;
+	Player* m_pPlayer2;
 
-	public:
-	MultiPlayerGame(Field &field, Ball &ball, Racket &racket1, Player &player1, Racket &racket2, Player &player2);
-	~MultiPlayerGame();
+public:
+	MultiPlayerGame();
+	virtual ~MultiPlayerGame();
 
-	const Racket & getRacket2() const;
-	const Player & getPlayer2() const;
+	void setRacket2(Racket* pRacket);
+	void setPlayer2(Player* pPlayer);
+	const Racket* getRacket2() const;
+	const Player* getPlayer2() const;
 
 	virtual void tick();
-
-	bool isFinished();
+	virtual bool isFinished() const;
 };
 
 

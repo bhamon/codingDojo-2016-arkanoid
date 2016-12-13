@@ -37,6 +37,26 @@ Brick::setPosition(const math::Point2<float>& position)
 	_position = position;
 }
 
+float Brick::top() const
+{
+	return _position.getY() - (HEIGHT / 2.f);
+}
+
+float Brick::bottom() const
+{
+	return _position.getY() + (HEIGHT / 2.f);
+}
+
+float Brick::right() const
+{
+	return _position.getX() + (WIDTH / 2.f);
+}
+
+float Brick::left() const
+{
+	return _position.getX() - (WIDTH / 2.f);
+}
+
 void
 Brick::setStrength(unsigned int strength)
 {
@@ -72,6 +92,6 @@ Brick::overlap(const Brick& brick) const
 bool
 Brick::operator==(const Brick& brick) const
 {
-	return _position.getX() == brick.getPosition().getX() && 
-		   _position.getY() == brick.getPosition().getY();
+	return _position.getX() == brick.getPosition().getX() &&
+		_position.getY() == brick.getPosition().getY();
 }

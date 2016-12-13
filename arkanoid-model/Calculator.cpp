@@ -63,40 +63,38 @@ Calculator::hit(const Ball& ball, const Racket& racket, const Field& field, HitR
 	bool hit = false;
 	HitRecord localHitRecord;
 
-	//float y = field.getHeight() - Racket::OFFSET;
-
 	//point en bas a gauche
-	math::Point2<float> pt1(racket.getPosition().getX() - Racket::WIDTH / 2, racket.getPosition().getY() + Racket::HEIGHT / 2);
+	math::Point2<float> bottomLeft(racket.left(), racket.bottom());
 	//point en bas a droite
-	math::Point2<float> pt2(racket.getPosition().getX() + Racket::WIDTH / 2, racket.getPosition().getY() + Racket::HEIGHT / 2);
+	math::Point2<float> bottomRight(racket.right(), racket.bottom());
 	//point en haut a gauche
-	math::Point2<float> pt3(racket.getPosition().getX() - Racket::WIDTH / 2, racket.getPosition().getY() - Racket::HEIGHT / 2);
+	math::Point2<float> topLeft(racket.left(), racket.top());
 	//point en haut a droite
-	math::Point2<float> pt4(racket.getPosition().getX() + Racket::WIDTH / 2, racket.getPosition().getY() - Racket::HEIGHT / 2);
+	math::Point2<float> topRight(racket.right(), racket.top());
 
 	// collision au dessus de la raquette
-	if(Calculator::hit(ball,  pt3, pt4, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	if(Calculator::hit(ball, topLeft, topRight, localHitRecord) && localHitRecord.getRollback() >= hitRecord.getRollback())
 	{
 		hitRecord = localHitRecord;
 		hit = true;
 	}
 
 	// collision au dessous de la raquette
-	if(Calculator::hit(ball, pt1, pt2, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	if(Calculator::hit(ball, bottomRight, bottomLeft, localHitRecord) && localHitRecord.getRollback() >= hitRecord.getRollback())
 	{
 		hitRecord = localHitRecord;
 		hit = true;
 	}
 
 	// collision à gauche de la raquette
-	if(Calculator::hit(ball, pt1, pt3, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	if(Calculator::hit(ball, bottomLeft, topLeft, localHitRecord) && localHitRecord.getRollback() >= hitRecord.getRollback())
 	{
 		hitRecord = localHitRecord;
 		hit = true;
 	}
 
 	// collision à droite de la raquette
-	if(Calculator::hit(ball, pt4, pt2, localHitRecord) && localHitRecord.getRollback() > hitRecord.getRollback())
+	if(Calculator::hit(ball, topRight, bottomRight, localHitRecord) && localHitRecord.getRollback() >= hitRecord.getRollback())
 	{
 		hitRecord = localHitRecord;
 		hit = true;
@@ -142,7 +140,7 @@ Calculator::hit(const Ball& ball, const math::Point2<float>& start, const math::
 	// The magnitude of the velocity vector to normalize the rollback factors.
 	float mv = ball.getVelocity().getMagnitude();
 	// Checking that rollback is within the bounds.
-	if(rollback <= 0.0f || rollback >= mv)
+	if(rollback < 0.0f || rollback >= mv)
 	{
 		return false;
 	}

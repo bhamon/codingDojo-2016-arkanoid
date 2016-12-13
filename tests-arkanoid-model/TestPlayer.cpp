@@ -42,5 +42,36 @@ namespace tests
 
 			Assert::IsTrue(p1 == p2);
 		};
+
+		TEST_METHOD(setLives)
+		{
+			Player player("Roger");
+			player.setLives(3);
+
+			Assert::AreEqual(3u, player.getLives());
+		};
+
+		TEST_METHOD(lostOneLife)
+		{
+			Player player("Roger");
+			player.setLives(3);
+			player.lostOneLife();
+
+			Assert::AreEqual(2u, player.getLives());
+
+			player.setLives(0);
+			player.lostOneLife();
+
+			Assert::AreEqual(0u, player.getLives());
+		};
+
+		TEST_METHOD(incrementScore)
+		{
+			Player player("Roger");
+			player.setScore(2091);
+			player.incrementScore();
+
+			Assert::AreEqual(2092u, player.getScore());
+		};
 	};
 }

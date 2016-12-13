@@ -151,6 +151,7 @@
     <ClCompile Include="ControllerLanguages.cpp" />
     <ClCompile Include="ControllerLevel.cpp" />
     <ClCompile Include="ControllerMenu.cpp" />
+    <ClCompile Include="ControllerMultiGame.cpp" />
     <ClCompile Include="ControllerSettings.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="ControllerGame.h" />
     <ClInclude Include="ControllerLevel.h" />
+    <ClInclude Include="ControllerMultiGame.h" />
     <ClInclude Include="ControllerSettings.h" />
     <ClInclude Include="ControllerLanguages.h" />
     <ClInclude Include="MainWindow.h" />
