@@ -161,6 +161,9 @@
   <ItemGroup>
     <ClCompile Include="TestDictionnary.cpp" />
     <ClCompile Include="TestMultiPlayerGame.cpp" />
+    <ClCompile Include="TestTrameClientAction.cpp" />
+    <ClCompile Include="TestTrameDiff.cpp" />
+    <ClCompile Include="TestTrameInit.cpp" />
     <ClCompile Include="TestSettingsManager.cpp" />
     <ClCompile Include="TestFieldLoader.cpp" />
     <ClCompile Include="TestGame.cpp" />
@@ -170,6 +173,7 @@
     <ClCompile Include="TestField.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
     <ClCompile Include="TestBall.cpp" />
+    <ClCompile Include="TestTrame.cpp" />
     <ClCompile Include="TestVector2.cpp" />
   </ItemGroup>
   <ItemGroup>

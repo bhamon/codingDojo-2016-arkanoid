@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include "ControllerLevel.h"
 #include "ControllerGame.h"
-#include "ControllerMultiGame.h"
+#include "ControllerNetworkGame.h"
 
 namespace arkanoid
 {
@@ -58,7 +58,7 @@ namespace arkanoid
 						else
 						{
 							std::ifstream str("Levels\\Level01Multi.txt");
-							mainWindow().pushController(new ControllerMultiGame(mainWindow(), str));
+							mainWindow().pushController(new ControllerNetworkGame(mainWindow(), str, "12345"));
 						}
 					}
 					break;
@@ -72,7 +72,7 @@ namespace arkanoid
 						else
 						{
 							std::ifstream str("Levels\\Level02Multi.txt");
-							mainWindow().pushController(new ControllerMultiGame(mainWindow(), str));
+							mainWindow().pushController(new ControllerNetworkGame(mainWindow(), str, "12345"));
 						}
 					}
 					break;

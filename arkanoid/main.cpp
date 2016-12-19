@@ -2,11 +2,16 @@
 #include <thread>
 #include <chrono>
 #include <Windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #include "MainWindow.h"
 
 int WINAPI WinMain(HINSTANCE p_instance, HINSTANCE p_previousInstance, LPSTR p_args, int p_show)
 {
 	arkanoid::Window::registerClass();
+
+	WSADATA wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
 	{
 		std::unique_ptr<arkanoid::MainWindow>window(new arkanoid::MainWindow(800, 600, "Arkanoid"));

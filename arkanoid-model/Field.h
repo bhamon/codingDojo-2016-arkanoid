@@ -28,6 +28,8 @@ class Field
 
 	std::list<Brick>::iterator begin();
 	std::list<Brick>::iterator end();
+	std::list<Brick>::const_iterator end() const;
+	std::list<Brick>::const_iterator begin() const;
 
 };
 

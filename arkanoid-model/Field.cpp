@@ -74,3 +74,11 @@ std::list<Brick>::iterator Field::end()
 {
 	return _bricks.end();
 }
+std::list<Brick>::const_iterator Field::begin() const
+{
+	return _bricks.begin();
+}
+std::list<Brick>::const_iterator Field::end() const
+{
+	return _bricks.end();
+}

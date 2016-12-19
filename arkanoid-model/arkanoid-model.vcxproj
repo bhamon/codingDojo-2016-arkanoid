@@ -146,6 +146,10 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
+    <ClCompile Include="Trame.cpp" />
+    <ClCompile Include="TrameClientAction.cpp" />
+    <ClCompile Include="TrameDiff.cpp" />
+    <ClCompile Include="TrameInit.cpp" />
     <ClInclude Include="Dictionnary.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="FieldLoader.h" />
@@ -155,6 +159,10 @@
     <ClInclude Include="Normal2.h" />
     <ClInclude Include="Point2.h" />
     <ClInclude Include="SettingsManager.h" />
+    <ClInclude Include="Trame.h" />
+    <ClInclude Include="TrameClientAction.h" />
+    <ClInclude Include="TrameDiff.h" />
+    <ClInclude Include="TrameInit.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
